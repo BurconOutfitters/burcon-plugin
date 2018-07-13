@@ -102,21 +102,6 @@ class Settings_Fields_Site {
 			'burcon_hide_welcome'
 		);
 
-		// Hide the welcome panel dismiss button.
-		add_settings_field(
-			'burcon_remove_welcome_dismiss',
-			__( 'Remove Welcome Dismiss', 'burcon-plugin' ),
-			[ $this, 'burcon_remove_welcome_dismiss_callback' ],
-			'burcon-site-dashboard',
-			'burcon-site-dashboard',
-			[ esc_html__( 'Remove the Welcome panel dismiss button', 'burcon-plugin' ) ]
-		);
-
-		register_setting(
-			'burcon_dashboard',
-			'burcon_remove_welcome_dismiss'
-		);
-
 		// Hide WordPress News widget.
 		add_settings_field(
 			'burcon_hide_wp_news',
@@ -620,26 +605,6 @@ class Settings_Fields_Site {
 		$html = '<p><input type="checkbox" id="burcon_widgets_position" name="burcon_widgets_position" value="1" ' . checked( 1, $option, false ) . '/>';
 
 		$html .= '<label for="burcon_widgets_position"> '  . $args[0] . '</label></p>';
-
-		echo $html;
-
-	}
-
-	/**
-	 * Remove welcome dismiss.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @param  array $args Extra arguments passed into the callback function.
-	 * @return string
-	 */
-	public function burcon_remove_welcome_dismiss_callback( $args ) {
-
-		$option = get_option( 'burcon_remove_welcome_dismiss' );
-
-		$html = '<p><input type="checkbox" id="burcon_remove_welcome_dismiss" name="burcon_remove_welcome_dismiss" value="1" ' . checked( 1, $option, false ) . '/>';
-
-		$html .= '<label for="burcon_remove_welcome_dismiss"> '  . $args[0] . '</label></p>';
 
 		echo $html;
 

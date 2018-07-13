@@ -28,5 +28,9 @@
 
 	.dashboard-summary li {
 		display: inline;
+
+		&:not(:last-of-type) {
+			margin-right: 1em;
+		}
 	}
 }

@@ -6,3 +6,7 @@
 .welcome-panel .welcome-panel-content.custom .dashboard-summary li {
   display: inline;
 }
+
+.welcome-panel .welcome-panel-content.custom .dashboard-summary li:not(:last-of-type) {
+  margin-right: 1em;
+}

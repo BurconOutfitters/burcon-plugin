@@ -64,17 +64,7 @@ class Welcome {
 		 */
 
 		// If ACF is active, get the field from the ACF options page.
-		if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
-			$dismiss = get_field( 'burcon_remove_welcome_dismiss', 'option' );
-
-		// If ACF is not active, get the field from the WordPress options page.
-		} else {
-			$dismiss = get_option( 'burcon_remove_welcome_dismiss' );
-		}
-
-		if ( $dismiss ) {
-			add_action( 'admin_head', [ $this, 'dismiss' ] );
-		}
+		add_action( 'admin_head', [ $this, 'dismiss' ] );
 
 		// Register the welcome panel areas.
 		add_action( 'widgets_init', [ $this, 'widget_areas' ], 25 );
