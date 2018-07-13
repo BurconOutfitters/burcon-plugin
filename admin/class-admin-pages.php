@@ -58,7 +58,7 @@ class Admin_Pages {
     public function __construct() {
 
         // Add an about page for the plugin.
-        add_action( 'admin_menu', [ $this, 'about_plugin' ] );
+        // add_action( 'admin_menu', [ $this, 'about_plugin' ] );
 
         // Replace default post title placeholders.
         add_filter( 'enter_title_here', [ $this, 'title_placeholders' ] );
