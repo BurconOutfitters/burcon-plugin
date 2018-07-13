@@ -97,31 +97,6 @@ class Settings_Fields_Site {
 			'burcon-site-dashboard'
 		);
 
-		// Use the custom welcome panel.
-		add_settings_field(
-			'burcon_custom_welcome',
-			__( 'Custom Welcome', 'burcon-plugin' ),
-			[ $this, 'burcon_custom_welcome_callback' ],
-			'burcon-site-dashboard',
-			'burcon-site-dashboard',
-			[ esc_html__( 'Use the custom Welcome panel on the Dashboard', 'burcon-plugin' ) ]
-		);
-
-		register_setting(
-			'burcon_dashboard',
-			'burcon_custom_welcome'
-		);
-
-		// Hide the welcome panel.
-		add_settings_field(
-			'burcon_hide_welcome',
-			__( 'Hide Welcome', 'burcon-plugin' ),
-			[ $this, 'burcon_hide_welcome_callback' ],
-			'burcon-site-dashboard',
-			'burcon-site-dashboard',
-			[ esc_html__( 'Hide the Welcome panel on the Dashboard', 'burcon-plugin' ) ]
-		);
-
 		register_setting(
 			'burcon_dashboard',
 			'burcon_hide_welcome'
@@ -645,46 +620,6 @@ class Settings_Fields_Site {
 		$html = '<p><input type="checkbox" id="burcon_widgets_position" name="burcon_widgets_position" value="1" ' . checked( 1, $option, false ) . '/>';
 
 		$html .= '<label for="burcon_widgets_position"> '  . $args[0] . '</label></p>';
-
-		echo $html;
-
-	}
-
-	/**
-	 * Use custom welcome panel.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @param  array $args Extra arguments passed into the callback function.
-	 * @return string
-	 */
-	public function burcon_custom_welcome_callback( $args ) {
-
-		$option = get_option( 'burcon_custom_welcome' );
-
-		$html = '<p><input type="checkbox" id="burcon_custom_welcome" name="burcon_custom_welcome" value="1" ' . checked( 1, $option, false ) . '/>';
-
-		$html .= '<label for="burcon_custom_welcome"> '  . $args[0] . '</label></p>';
-
-		echo $html;
-
-	}
-
-	/**
-	 * Hide welcome panel.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @param  array $args Extra arguments passed into the callback function.
-	 * @return string
-	 */
-	public function burcon_hide_welcome_callback( $args ) {
-
-		$option = get_option( 'burcon_hide_welcome' );
-
-		$html = '<p><input type="checkbox" id="burcon_hide_welcome" name="burcon_hide_welcome" value="1" ' . checked( 1, $option, false ) . '/>';
-
-		$html .= '<label for="burcon_hide_welcome"> '  . $args[0] . '</label></p>';
 
 		echo $html;
 

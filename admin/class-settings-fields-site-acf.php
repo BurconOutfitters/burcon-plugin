@@ -87,25 +87,6 @@ final class Settings_Fields_ACF {
 						'endpoint'          => 0,
 					],
 					[
-						'key'               => 'field_5b4807983ccaf',
-						'label'             => 'Custom Welcome',
-						'name'              => 'burcon_custom_welcome',
-						'type'              => 'true_false',
-						'instructions'      => 'Use the custom Welcome panel on the Dashboard',
-						'required'          => 0,
-						'conditional_logic' => 0,
-						'wrapper'           => [
-							'width' => '',
-							'class' => '',
-							'id'    => '',
-						],
-						'message'           => '',
-						'default_value'     => 0,
-						'ui'                => 0,
-						'ui_on_text'        => '',
-						'ui_off_text'       => '',
-					],
-					[
 						'key'               => 'field_5b48081b3ccb0',
 						'label'             => 'Remove Welcome Dismiss',
 						'name'              => 'burcon_remove_welcome_dismiss',
@@ -138,7 +119,6 @@ final class Settings_Fields_ACF {
 							'id'    => '',
 						],
 						'choices'           => [
-							'welcome'   => __( 'Welcome', 'burcon-plugin' ),
 							'news'      => __( 'WordPress News', 'burcon-plugin' ),
 							'quick'     => __( 'Quick Press', 'burcon-plugin' ),
 							'at_glance' => __( 'At a Glance', 'burcon-plugin' ),

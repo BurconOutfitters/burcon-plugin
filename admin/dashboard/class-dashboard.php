@@ -170,6 +170,9 @@ class Dashboard {
 
         global $wp_meta_boxes;
 
+        // Hide At a Glance widget always because we have it in the welcome panel.
+        unset( $wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now'] );
+
         // If Advanced Custom Fields Pro is active.
         if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
 
@@ -189,11 +192,6 @@ class Dashboard {
             // Hide Quick Draft (QuickPress) widget.
             if ( $hide && in_array( 'quick', $hide ) ) {
                 unset( $wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press'] );
-            }
-
-            // Hide At a Glance widget.
-            if ( $hide && in_array( 'at_glance', $hide ) ) {
-                unset( $wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now'] );
             }
 
             // Hide Activity widget.
