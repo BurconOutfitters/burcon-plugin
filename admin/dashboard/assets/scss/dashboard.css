@@ -1,0 +1,45 @@
+/**
+ * Custom welcome panel styles
+ *
+ * This stylesheet is enqueued in the functions file.
+ */
+.welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap {
+  display: flex;
+}
+
+.welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-greeting {
+  flex-grow: 1;
+}
+
+.welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-summary {
+  flex-grow: 2;
+}
+
+.welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-summary ul {
+  margin: 0;
+}
+
+.welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-summary ul li {
+  display: inline;
+}
+
+.welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-summary ul li:not(:last-of-type) {
+  margin-right: 1em;
+}
+
+.welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-summary #wp-version-message {
+  margin: 0;
+}
+
+/*--------------------------------------------------------------
+# WORDPRESS QUERIES
+--------------------------------------------------------------*/
+@media screen and (max-width: 782px) {
+  .welcome-panel-header-wrap {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  /* Styles */
+}

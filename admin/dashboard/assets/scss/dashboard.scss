@@ -6,6 +6,37 @@
 
 .welcome-panel .welcome-panel-content.custom {
 
+	.welcome-panel-header {
+
+		.welcome-panel-header-wrap {
+			display: flex;
+
+			.dashboard-greeting {
+				flex-grow: 1;
+			}
+
+			.dashboard-summary {
+				flex-grow: 2;
+
+				ul {
+					margin: 0;
+
+					li {
+						display: inline;
+
+						&:not(:last-of-type) {
+							margin-right: 1em;
+						}
+					}
+				}
+
+				#wp-version-message {
+					margin: 0;
+				}
+			}
+		}
+	}
+
 	.welcome-panel-column-container {
 
 		.welcome-panel-column {
@@ -26,11 +57,19 @@
 
 	.about-description{}
 
-	.dashboard-summary li {
-		display: inline;
+}
 
-		&:not(:last-of-type) {
-			margin-right: 1em;
-		}
+/*--------------------------------------------------------------
+# WORDPRESS QUERIES
+--------------------------------------------------------------*/
+@media screen and ( max-width: 782px ) {
+
+	.welcome-panel-header-wrap {
+		flex-direction: column;
 	}
+
+}
+
+@media screen and ( max-width: 600px ) {
+	/* Styles */
 }

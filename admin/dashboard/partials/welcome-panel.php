@@ -39,16 +39,22 @@ $about_desc = apply_filters( 'burcon_welcome_about', __( 'Put your welcome messa
 <div class="welcome-panel-content custom">
 	<?php do_action( 'burcon_welcome_panel_content_before' ); ?>
 
-	<?php echo sprintf(
-		'<h2>%1s %2s.</h2>',
-		esc_html__( 'Howdy,', 'burcon-plugin' ),
-		$user_name
-	); ?>
-	<p class="about-description"><?php echo $about_desc; ?></p>
-	<div class="dashboard-summary">
-		<?php wp_dashboard_right_now(); ?>
-	</div>
-	<?php echo $subheading; ?>
+	<header class="welcome-panel-header">
+		<div class="welcome-panel-header-wrap">
+			<div class="dashboard-greeting">
+				<?php echo sprintf(
+					'<h2>%1s %2s.</h2>',
+					esc_html__( 'Howdy,', 'burcon-plugin' ),
+					$user_name
+				); ?>
+				<p class="about-description"><?php echo $about_desc; ?></p>
+			</div>
+			<div class="dashboard-summary">
+				<?php wp_dashboard_right_now(); ?>
+			</div>
+		</div>
+		<?php echo $subheading; ?>
+	</header>
 
 	<div class="welcome-panel-column-container">
 		<?php do_action( 'burcon_welcome_panel_column_container_before' ); ?>

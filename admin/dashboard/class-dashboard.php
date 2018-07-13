@@ -372,6 +372,8 @@ class Dashboard {
      * @since  1.0.0
 	 * @access public
 	 * @return void
+     *
+     * @todo   Put CSS back to the CSS directory.
 	 */
 	public function styles() {
 
@@ -380,7 +382,7 @@ class Dashboard {
 
         // Enqueue only on the Dashboard screen.
         if ( $screen->id == 'dashboard' ) {
-            wp_enqueue_style( BURCON_ADMIN_SLUG . '-dashboard', plugin_dir_url( __FILE__ ) .  'assets/css/dashboard.css', [], null, 'screen' );
+            wp_enqueue_style( BURCON_ADMIN_SLUG . '-dashboard', plugin_dir_url( __FILE__ ) .  'assets/scss/dashboard.css', [], null, 'screen' );
         }
 
 	}
