@@ -100,7 +100,11 @@ class Dashboard {
         }
 
         $current_user    = wp_get_current_user();
-        $user_name       = $current_user->first_name;
+        if ( ! empty( $current_user->first_name ) ) {
+            $user_name = $current_user->first_name;
+        } else {
+            $user_name = $current_user->display_name;
+        }
         $dashboard_title = sprintf(
             '%1s %2s! %3s',
             __( 'Howdy,', 'burcon-plugin' ),
