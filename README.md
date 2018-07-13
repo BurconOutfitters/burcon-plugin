@@ -36,3 +36,7 @@ Included are several frontend UI/UX plugins. They are enqueued via opt-in checkb
 * Tooltipster - [https://github.com/iamceege/tooltipster](https://github.com/iamceege/tooltipster)
   *"Flexible, extensible, and modern tooltips."*
 * FitVids - [https://github.com/davatron5000/FitVids.js](https://github.com/davatron5000/FitVids.js)
+
+### Credits
+
+All Burcon Outfitters repositories created and maintained by [Controlled Chaos Design](https://github.com/ControlledChaos).
