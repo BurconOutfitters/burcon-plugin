@@ -256,14 +256,6 @@ function controlled_chaos_settings_links( $links, $file ) {
 			esc_attr( 'Script Options', 'burcon-plugin' )
 		);
 
-		// Add a placeholder for an upgrade link.
-		$links[] = sprintf(
-			'<a href="%1s" title="%2s" class="' . BURCON_ADMIN_SLUG . '-upgrade-link" style="color: #888; cursor: default;">%3s</a>',
-			''/* Add upgrade URL here */,
-			__( 'Upgrade not available', 'burcon-plugin' ),
-			esc_attr( 'Upgrade', 'burcon-plugin' )
-		);
-
 	}
 
 	// Return the full array of links.
