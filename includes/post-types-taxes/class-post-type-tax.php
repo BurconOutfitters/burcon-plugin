@@ -69,12 +69,6 @@ class Post_Types_Taxes {
      */
 	public function dependencies() {
 
-		// Resister cutsom post types.
-		require_once plugin_dir_path( __FILE__ ) . 'class-register-post-types.php';
-
-		// Resister cutsom taxonomies.
-		require_once plugin_dir_path( __FILE__ ) . 'class-register-taxonomies.php';
-
 		// Functions related to post types and taxonomies.
 		require_once plugin_dir_path( __FILE__ ) . 'class-post-type-tax-functions.php';
 
