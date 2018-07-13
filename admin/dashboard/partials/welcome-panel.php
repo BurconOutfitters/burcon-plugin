@@ -24,6 +24,18 @@ if ( ! defined( 'WPINC' ) ) {
 $current_user = wp_get_current_user();
 $user_name    = $current_user->display_name;
 
+/**
+ * Site logo.
+ */
+$logo_id  = get_theme_mod( 'custom_logo' );
+$get_logo = wp_get_attachment_image_src( $logo_id , 'full' );
+if ( function_exists( 'the_custom_logo' ) ) {
+	$output = '<img src="' . esc_url( $get_logo[0] ) . '">';
+} else {
+	$output = null;
+}
+$logo = apply_filters( 'burcon_welcome_logo', $output );
+
 // Add a filterable subheading.
 $subheading = sprintf(
 	'<h3>%1s</h3>',
@@ -38,14 +50,17 @@ $about_desc = apply_filters( 'burcon_welcome_about', __( 'Put your welcome messa
 <?php do_action( 'burcon_before_welcome_panel_content' ); ?>
 <div class="welcome-panel-content custom">
 	<?php do_action( 'burcon_welcome_panel_content_before' ); ?>
-
 	<header class="welcome-panel-header">
+		<?php do_action( 'burcon_welcome_panel_header_before' ); ?>
 		<div class="welcome-panel-header-wrap">
+			<div class="dashboard-logo">
+				<?php echo $logo; ?>
+			</div>
 			<div class="dashboard-greeting">
 				<?php echo sprintf(
-					'<h2>%1s %2s.</h2>',
-					esc_html__( 'Howdy,', 'burcon-plugin' ),
-					$user_name
+					'<h2>%1s %2s</h2>',
+					get_bloginfo( 'name' ),
+					__( 'Dashboard' )
 				); ?>
 				<p class="about-description"><?php echo $about_desc; ?></p>
 			</div>
@@ -54,8 +69,8 @@ $about_desc = apply_filters( 'burcon_welcome_about', __( 'Put your welcome messa
 			</div>
 		</div>
 		<?php echo $subheading; ?>
+	<?php do_action( 'burcon_welcome_panel_header_after' ); ?>
 	</header>
-
 	<div class="welcome-panel-column-container">
 		<?php do_action( 'burcon_welcome_panel_column_container_before' ); ?>
 

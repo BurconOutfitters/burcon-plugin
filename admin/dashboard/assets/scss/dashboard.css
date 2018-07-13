@@ -7,6 +7,15 @@
   display: flex;
 }
 
+.welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-logo {
+  max-width: 120px;
+  margin-right: 2em;
+}
+
+.welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-logo img {
+  max-width: 100%;
+}
+
 .welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-greeting {
   flex-grow: 1;
 }

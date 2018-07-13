@@ -11,6 +11,15 @@
 		.welcome-panel-header-wrap {
 			display: flex;
 
+			.dashboard-logo {
+				max-width: 120px;
+				margin-right: 2em;
+
+				img {
+					max-width: 100%;
+				}
+			}
+
 			.dashboard-greeting {
 				flex-grow: 1;
 			}

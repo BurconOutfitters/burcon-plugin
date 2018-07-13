@@ -60,6 +60,9 @@ class Dashboard {
 	 */
     public function __construct() {
 
+        // New title for the Dashboard page.
+        add_filter( 'admin_title', [ $this, 'dashboard_title' ], 10, 2 );
+
         // "At a Glance" dashboard widget.
         add_action( 'dashboard_glance_items', [ $this, 'at_glance' ] );
 
@@ -74,6 +77,40 @@ class Dashboard {
 
         // Enqueue dashboard stylesheet.
 		add_action( 'admin_enqueue_scripts', [ $this, 'styles' ] );
+
+    }
+
+    /**
+     * New title for the Dashboard page.
+     *
+     * @since  1.0.0
+	 * @access public
+     * @global object current_screen
+     * @global object title
+	 * @return string
+     */
+    public function dashboard_title( $admin_title, $title, $current_user = '', $user_name = '',  $dashboard_title = '' ) {
+
+        global $current_screen, $title;
+
+        if ( $current_screen->id != 'dashboard' ) {
+
+            return $admin_title;
+
+        }
+
+        $current_user    = wp_get_current_user();
+        $user_name       = $current_user->first_name;
+        $dashboard_title = sprintf(
+            '%1s %2s! %3s',
+            __( 'Howdy,', 'burcon-plugin' ),
+            $user_name,
+            __( '', 'abcd-plugin' )
+        );
+        $admin_title     = str_replace( __( 'Dashboard' ) , $dashboard_title , $admin_title );
+        $title           = $dashboard_title;
+
+        return $admin_title;
 
     }
 
