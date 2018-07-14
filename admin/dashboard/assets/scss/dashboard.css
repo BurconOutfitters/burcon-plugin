@@ -25,7 +25,7 @@
 }
 
 .welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-summary ul {
-  margin: 0;
+  margin-bottom: 0;
 }
 
 .welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-summary ul li {
@@ -36,8 +36,35 @@
   margin-right: 1em;
 }
 
+.welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-summary ul li a:before {
+  font-size: 1.35em;
+  font-family: 'Dashicons';
+  margin-right: 0.3em;
+  vertical-align: middle;
+}
+
+.welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-summary ul li.post-count a:before {
+  content: '\f109';
+}
+
+.welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-summary ul li.page-count a:before {
+  content: '\f105';
+}
+
+.welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-summary ul li.comment-count a:before {
+  content: '\f101';
+}
+
+.welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-summary ul li.hidden {
+  display: none;
+}
+
 .welcome-panel .welcome-panel-content.custom .welcome-panel-header .welcome-panel-header-wrap .dashboard-summary #wp-version-message {
   margin: 0;
+}
+
+.welcome-panel .welcome-panel-content.custom .about-description {
+  margin-top: 0.5em;
 }
 
 /*--------------------------------------------------------------

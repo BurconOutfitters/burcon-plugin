@@ -28,13 +28,39 @@
 				flex-grow: 2;
 
 				ul {
-					margin: 0;
+					margin-bottom: 0;
 
 					li {
 						display: inline;
 
 						&:not(:last-of-type) {
 							margin-right: 1em;
+						}
+
+						a {
+
+							&:before {
+								font-size: 1.35em;
+								font-family: 'Dashicons';
+								margin-right: 0.3em;
+								vertical-align: middle;
+							}
+						}
+
+						&.post-count a:before {
+							content: '\f109';
+						}
+
+						&.page-count a:before {
+							content: '\f105';
+						}
+
+						&.comment-count a:before {
+							content: '\f101';
+						}
+
+						&.hidden {
+							display: none;
 						}
 					}
 				}
@@ -64,7 +90,9 @@
 
 	h2 {}
 
-	.about-description{}
+	.about-description{
+		margin-top: 0.5em;
+	}
 
 }
 

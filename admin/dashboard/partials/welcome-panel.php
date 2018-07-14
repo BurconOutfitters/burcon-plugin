@@ -65,6 +65,7 @@ $about_desc = apply_filters( 'burcon_welcome_about', __( 'Put your welcome messa
 				<p class="about-description"><?php echo $about_desc; ?></p>
 			</div>
 			<div class="dashboard-summary">
+				<h2><?php _e( 'Website Summary', 'burcon-plugin' ); ?></h2>
 				<?php wp_dashboard_right_now(); ?>
 			</div>
 		</div>

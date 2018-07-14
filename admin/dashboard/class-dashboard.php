@@ -85,35 +85,48 @@ class Dashboard {
      *
      * @since  1.0.0
 	 * @access public
-     * @global object current_screen
-     * @global object title
-	 * @return string
+     * @param  object $admin_title
+     * @param  object $title
+     * @param  string $current_user
+     * @param  string $user_name
+     * @param  string $dashboard_title
+     * @return string Returns the amended dashboard screen title.
      */
     public function dashboard_title( $admin_title, $title, $current_user = '', $user_name = '',  $dashboard_title = '' ) {
 
+        // Get the current screen and title objects.
         global $current_screen, $title;
 
-        if ( $current_screen->id != 'dashboard' ) {
-
+        // Bail if not on the dashboard screen.
+        if ( 'dashboard' != $current_screen->id  ) {
             return $admin_title;
-
         }
 
-        $current_user    = wp_get_current_user();
+        // Get the current user to extract the name.
+        $current_user = wp_get_current_user();
+
+        // if the user has provided a first name then use it.
         if ( ! empty( $current_user->first_name ) ) {
             $user_name = $current_user->first_name;
+
+        // Otherwise use the display name.
         } else {
             $user_name = $current_user->display_name;
         }
+
+        // Assemble the title text without HTML.
         $dashboard_title = sprintf(
             '%1s %2s! %3s',
             __( 'Howdy,', 'burcon-plugin' ),
             $user_name,
             __( '', 'abcd-plugin' )
         );
+
+        // Repalce the word "Dasboard" with our new title.
         $admin_title     = str_replace( __( 'Dashboard' ) , $dashboard_title , $admin_title );
         $title           = $dashboard_title;
 
+        // Return the new title.
         return $admin_title;
 
     }
