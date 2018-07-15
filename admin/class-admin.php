@@ -2,14 +2,14 @@
 /**
  * Admin functiontionality and settings.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace CC_Plugin\Admin;
+namespace Burcon_Plugin\Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

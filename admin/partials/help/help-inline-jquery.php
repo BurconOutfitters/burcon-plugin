@@ -3,12 +3,12 @@
 /**
  * Content for the Inline jQuery help tab.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage controlled-chaos
  * @since controlled-chaos 1.0.0
  */
 
-namespace CC_Plugin\Settings\Help\Inline_jQuery;
+namespace Burcon_Plugin\Settings\Help\Inline_jQuery;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

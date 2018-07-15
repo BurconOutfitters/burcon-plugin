@@ -2,7 +2,7 @@
 /**
  * Minify HTML source code.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Includes
  *
  * @since      1.0.0
@@ -11,7 +11,7 @@
  * @todo       Work out the errors thrown when the file is namespaced
  */
 
-// namespace CC_Plugin\Includes\Minify;
+// namespace Burcon_Plugin\Includes\Minify;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

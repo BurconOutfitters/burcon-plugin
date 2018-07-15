@@ -2,14 +2,14 @@
 /**
  * Media functionality.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Includes\Media
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace CC_Plugin\Includes\Media;
+namespace Burcon_Plugin\Includes\Media;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

@@ -2,7 +2,7 @@
 /**
  * Settings fields for site development.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0
@@ -12,7 +12,7 @@
  * @todo       Finish converting the debug plugin to work with a setting.
  */
 
-namespace CC_Plugin\Plugin_Admin;
+namespace Burcon_Plugin\Plugin_Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

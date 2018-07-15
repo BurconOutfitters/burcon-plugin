@@ -2,14 +2,14 @@
 /**
  * Welcome panel functionality.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Admin\Dashboard
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace CC_Plugin\Admin\Dashboard;
+namespace Burcon_Plugin\Admin\Dashboard;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

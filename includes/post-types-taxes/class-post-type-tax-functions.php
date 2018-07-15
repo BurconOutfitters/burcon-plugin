@@ -2,14 +2,14 @@
 /**
  * Functions for post types and taxonomies.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Includes\Post_Types_Taxes
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace CC_Plugin\Includes\Post_Types_Taxes;
+namespace Burcon_Plugin\Includes\Post_Types_Taxes;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

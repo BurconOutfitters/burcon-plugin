@@ -7,14 +7,14 @@
  * However, I like to do things properly and I want this to serve as
  * an example of how it should be done for your project.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Admin\Partials
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace CC_Plugin\Admin\Partials;
+namespace Burcon_Plugin\Admin\Partials;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

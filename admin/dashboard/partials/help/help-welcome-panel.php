@@ -2,7 +2,7 @@
 /**
  * Content for the Welcome Panel help tab.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Admin\Partials\Help
  *
  * @since      1.0.0
@@ -12,7 +12,7 @@
  *             panel is ready to use.
  */
 
-namespace CC_Plugin\Admin\Dashboard\Partials\Help;
+namespace Burcon_Plugin\Admin\Dashboard\Partials\Help;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

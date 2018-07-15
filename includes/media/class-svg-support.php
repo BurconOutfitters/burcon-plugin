@@ -4,7 +4,7 @@
  *
  * The funtionality is taken from the SVG Support plugin.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Includes\Media
  *
  * @since      1.0.0
@@ -13,7 +13,7 @@
  * @link       https://wordpress.org/plugins/svg-support/
  */
 
-namespace CC_Plugin\Includes\Media;
+namespace Burcon_Plugin\Includes\Media;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

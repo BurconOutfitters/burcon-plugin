@@ -2,7 +2,7 @@
 /**
  * The frontend functionality of the plugin.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Frontend
  *
  * @since      1.0.0
@@ -15,7 +15,7 @@
  * @link       Fancybox    http://fancyapps.com/fancybox/3/
  */
 
-namespace CC_Plugin\Frontend;
+namespace Burcon_Plugin\Frontend;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

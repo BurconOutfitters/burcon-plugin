@@ -2,14 +2,14 @@
 /**
  * Head scripts.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Frontend
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace CC_Plugin\Frontend;
+namespace Burcon_Plugin\Frontend;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

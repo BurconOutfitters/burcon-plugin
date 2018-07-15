@@ -2,7 +2,7 @@
 /**
  * Fired when the plugin is uninstalled.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0

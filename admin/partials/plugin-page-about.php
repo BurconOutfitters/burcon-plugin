@@ -6,7 +6,7 @@
  * with WordPress. Tabs are activated by targeting the `backend-tabbed-content`
  * in this plugin's admin.js file.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Admin\Partials
  *
  * @since      1.0.0
@@ -16,7 +16,7 @@
  * @link       Dashicons https://developer.wordpress.org/resource/dashicons/
  */
 
-namespace CC_Plugin\Admin\Partials;
+namespace Burcon_Plugin\Admin\Partials;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

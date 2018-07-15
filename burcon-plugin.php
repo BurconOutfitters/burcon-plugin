@@ -4,7 +4,7 @@
  *
  * Change this header information to suit your needs.
  *
- * @package     Burcon_Outfitters_Plugin
+ * @package     Burcon_Plugin
  * @version     1.0.0
  * @author      Greg Sweet <greg@ccdzine.com>
  * @copyright   Copyright © 2018, Greg Sweet
@@ -79,7 +79,7 @@ if ( ! defined( 'BURCON_DEFAULT_META_IMAGE' ) ) {
  * @since  1.0.0
  * @access public
  */
-class Burcon_Outfitters_Plugin {
+class Burcon_Plugin {
 
 	/**
 	 * Get an instance of the plugin class.
@@ -144,11 +144,11 @@ class Burcon_Outfitters_Plugin {
  *
  * @since  1.0.0
  * @access public
- * @return object Returns the instance of the `Burcon_Outfitters_Plugin` class.
+ * @return object Returns the instance of the `Burcon_Plugin` class.
  */
 function burcon_plugin() {
 
-	return Burcon_Outfitters_Plugin::instance();
+	return Burcon_Plugin::instance();
 
 }
 

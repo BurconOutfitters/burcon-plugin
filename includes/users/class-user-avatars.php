@@ -4,7 +4,7 @@
  *
  * Also provides front-end avatar management via a shortcode and bbPress support.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Includes\Users
  *
  * @since      1.0.0
@@ -14,7 +14,7 @@
  * @link       http://wordpress.org/extend/basic-user-avatars
  */
 
-namespace CC_Plugin\Includes\Users;
+namespace Burcon_Plugin\Includes\Users;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

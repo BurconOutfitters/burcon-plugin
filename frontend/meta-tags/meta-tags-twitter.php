@@ -2,7 +2,7 @@
 /**
  * Twitter card meta tags.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Frontend\Meta_Tags
  *
  * @since      1.0.0
@@ -11,7 +11,7 @@
  * @link       https://developer.twitter.com/en/docs/tweets/optimize-with-cards/overview/markup.html
  */
 
-namespace CC_Plugin\Frontend\Meta_Tags;
+namespace Burcon_Plugin\Frontend\Meta_Tags;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

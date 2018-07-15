@@ -4,7 +4,7 @@
  *
  * This file must not be namespaced.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Includes
  *
  * @since      1.0.0

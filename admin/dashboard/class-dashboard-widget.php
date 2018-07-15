@@ -7,7 +7,7 @@
  * @since IntegratePress 1.0.0
  */
 
-namespace CC_Plugin\Admin\Dashboard;
+namespace Burcon_Plugin\Admin\Dashboard;
 
 // Restrict direct access
 if ( ! defined( 'ABSPATH' ) ) exit;

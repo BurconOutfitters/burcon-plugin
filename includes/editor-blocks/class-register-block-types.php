@@ -2,14 +2,14 @@
 /**
  * Register custom editor blocks.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Includes\Editor_Blocks
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace CC_Plugin\Includes\Editor_Blocks;
+namespace Burcon_Plugin\Includes\Editor_Blocks;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

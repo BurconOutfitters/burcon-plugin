@@ -7,7 +7,7 @@
  * @link       http://ccdzine.com
  * @since      1.0.0
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Includes
  */
 

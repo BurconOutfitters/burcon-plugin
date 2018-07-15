@@ -2,7 +2,7 @@
 /**
  * Live theme test.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage Includes\Tools
  *
  * @since      1.0.0
@@ -13,7 +13,7 @@
  *             hiding the Development Tools admin page.
  */
 
-// namespace CC_Plugin\Includes\Tools;
+// namespace Burcon_Plugin\Includes\Tools;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

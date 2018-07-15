@@ -2,12 +2,12 @@
 /**
  * Site settings page field groups.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage controlled-chaos\admin
  * @since      1.0.0
  */
 
-namespace CC_Plugin\Admin;
+namespace Burcon_Plugin\Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

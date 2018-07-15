@@ -2,12 +2,12 @@
 /**
  * Field import page.
  *
- * @package    Burcon_Outfitters_Plugin
+ * @package    Burcon_Plugin
  * @subpackage controlled-chaos
  * @since controlled-chaos 1.0.0
  */
 
-namespace CC_Plugin\Fields_Import_Page;
+namespace Burcon_Plugin\Fields_Import_Page;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
