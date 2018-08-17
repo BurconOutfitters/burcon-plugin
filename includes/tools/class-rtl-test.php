@@ -7,7 +7,7 @@
  *
  * This file must not be namespaced.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Includes
  *
  * @since      1.0.0
@@ -23,10 +23,10 @@
  * @since  1.0.0
  * @access public
  */
-class Controlled_Chaos_RTL_Test {
+class Burcon_Outfitters_RTL_Test {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -144,11 +144,11 @@ class Controlled_Chaos_RTL_Test {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_rtl_test() {
+function ccp_rtl_test() {
 
-	return Controlled_Chaos_RTL_Test::instance();
+	return Burcon_Outfitters_RTL_Test::instance();
 
 }
 
 // Run an instance of the class.
-burcon_rtl_test();
+ccp_rtl_test();

@@ -2,14 +2,14 @@
 /**
  * The core plugin class.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Includes
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Includes;
+namespace CC_Plugin\Includes;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -28,7 +28,7 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 class Init {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -57,10 +57,10 @@ class Init {
 	 * Constructor method.
 	 *
 	 * @since  1.0.0
-	 * @access public
+	 * @access private
 	 * @return self
 	 */
-	public function __construct() {
+	private function __construct() {
 
 		// Remove the capital P filter.
 		remove_filter( 'the_title', 'capital_P_dangit', 11 );
@@ -79,16 +79,16 @@ class Init {
 	private function dependencies() {
 
 		// Translation functionality.
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-i18n.php';
+		require_once BURCON_PATH . 'includes/class-i18n.php';
 
 		// Admin/backend functionality, scripts and styles.
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-admin.php';
+		require_once BURCON_PATH . 'admin/class-admin.php';
 
 		// Frontend functionality, scripts and styles.
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'frontend/class-frontend.php';
+		require_once BURCON_PATH . 'frontend/class-frontend.php';
 
 		// Various media and media library functionality.
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/media/class-media.php';
+		require_once BURCON_PATH . 'includes/media/class-media.php';
 
 		/**
 		 * Register custom editor blocks.
@@ -97,18 +97,18 @@ class Init {
 		 */
 		if ( is_plugin_active( 'gutenberg/gutenberg.php' ) ) {
 
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/editor-blocks/class-register-block-types.php';
+			require_once BURCON_PATH . 'includes/editor-blocks/class-register-block-types.php';
 
 		}
 
 		// Post types and taxonomies.
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/post-types-taxes/class-post-type-tax.php';
+		require_once BURCON_PATH . 'includes/post-types-taxes/class-post-type-tax.php';
 
-		// User avatars.
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/users/class-user-avatars.php';
+		// User funtionality.
+		require_once BURCON_PATH . 'includes/users/class-users.php';
 
 		// Dev and maintenance tools.
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/tools/class-tools.php';
+		require_once BURCON_PATH . 'includes/tools/class-tools.php';
 
 	}
 
@@ -121,11 +121,11 @@ class Init {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_init() {
+function ccp_init() {
 
 	return Init::instance();
 
 }
 
 // Run an instance of the class.
-burcon_init();
+ccp_init();

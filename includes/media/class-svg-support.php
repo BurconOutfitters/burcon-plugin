@@ -4,7 +4,7 @@
  *
  * The funtionality is taken from the SVG Support plugin.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Includes\Media
  *
  * @since      1.0.0
@@ -13,7 +13,7 @@
  * @link       https://wordpress.org/plugins/svg-support/
  */
 
-namespace Burcon_Plugin\Includes\Media;
+namespace CC_Plugin\Includes\Media;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -29,7 +29,7 @@ if ( ! defined( 'WPINC' ) ) {
 class SVG_Support {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -64,7 +64,7 @@ class SVG_Support {
 		global $wp_version;
 
 		// Add SVG upload support if option selected.
-		$add_svg = get_option( 'burcon_add_svg_support' );
+		$add_svg = get_option( 'ccp_add_svg_support' );
 		if ( $add_svg ) {
 			add_action( 'admin_init', [ $this, 'svg_support' ] );
 			add_filter( 'wp_check_filetype_and_ext', [ $this, 'svg_filetype' ], 100, 4 );

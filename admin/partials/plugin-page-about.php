@@ -6,7 +6,7 @@
  * with WordPress. Tabs are activated by targeting the `backend-tabbed-content`
  * in this plugin's admin.js file.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin\Partials
  *
  * @since      1.0.0
@@ -16,7 +16,7 @@
  * @link       Dashicons https://developer.wordpress.org/resource/dashicons/
  */
 
-namespace Burcon_Plugin\Admin\Partials;
+namespace CC_Plugin\Admin\Partials;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -36,7 +36,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 
 // Get the settings page menu icon option from Site Settings.
-$settings_icon = sanitize_text_field( get_option( 'burcon_site_settings_link_icon' ) );
+$settings_icon = sanitize_text_field( get_option( 'ccp_site_settings_link_icon' ) );
 
 // If it's not empty, use the icon class from the option.
 if ( $settings_icon ) {
@@ -95,7 +95,7 @@ $tabs = [
 ];
 
 // Apply a filter to the tabs array for adding tabs.
-$page_tabs = apply_filters( 'burcon_tabs_page_about', $tabs );
+$page_tabs = apply_filters( 'ccp_tabs_page_about', $tabs );
 
 ?>
 <!-- Default WordPress page wrapper -->
@@ -112,24 +112,24 @@ $page_tabs = apply_filters( 'burcon_tabs_page_about', $tabs );
 			<?php echo implode( $page_tabs ); ?>
 		</ul>
 		<?php // Hook for adding tabbed content.
-		do_action( 'burcon_content_page_about_before' ); ?>
+		do_action( 'ccp_content_page_about_before' ); ?>
 		<!-- Begin content -->
 		<div id="intro"><!-- Introduction content -->
-			<?php include_once plugin_dir_path( __FILE__ ) . 'plugin-page-intro.php'; ?>
+			<?php include_once BURCON_PATH . 'admin/partials/plugin-page-intro.php'; ?>
 		</div>
 		<div id="settings"><!-- Site Settings content -->
-			<?php include_once plugin_dir_path( __FILE__ ) . 'plugin-page-site-settings.php'; ?>
+			<?php include_once BURCON_PATH . 'admin/partials/plugin-page-site-settings.php'; ?>
 		</div>
 		<div id="scripts"><!-- Script Options content -->
-			<?php include_once plugin_dir_path( __FILE__ ) . 'plugin-page-script-options.php'; ?>
+			<?php include_once BURCON_PATH . 'admin/partials//plugin-page-script-options.php'; ?>
 		</div>
 		<div id="media"><!-- Media Options content -->
-			<?php include_once plugin_dir_path( __FILE__ ) . 'plugin-page-media-options.php'; ?>
+			<?php include_once BURCON_PATH . 'admin/partials/plugin-page-media-options.php'; ?>
 		</div>
 		<div id="tools"><!-- Dev Tools content -->
-			<?php include_once plugin_dir_path( __FILE__ ) . 'plugin-page-dev-tools.php'; ?>
+			<?php include_once BURCON_PATH . 'admin/partials/plugin-page-dev-tools.php'; ?>
 		</div>
 		<?php // Hook for adding tabbed content.
-		do_action( 'burcon_content_page_about_after' ); ?>
+		do_action( 'ccp_content_page_about_after' ); ?>
 	</div><!-- End jQuery tabbed content -->
 </div><!-- End WordPress page wrapper -->

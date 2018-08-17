@@ -2,14 +2,14 @@
 /**
  * Settings page for site customization.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin;
+namespace CC_Plugin\Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Settings_Page_Site {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -70,9 +70,17 @@ class Settings_Page_Site {
 	 * then a default WordPress admin page and the WP Settings
 	 * API will be used.
 	 *
+	 * Uses the universal slug partial for admin pages. Set this
+     * slug in the core plugin file.
+	 *
 	 * @since  1.0.0
 	 * @access public
+	 * @global string pagenow Gets the current admin screen URL.
 	 * @return void
+	 *
+	 * @link   https://www.advancedcustomfields.com/resources/acf_add_options_page/
+	 * @link   https://developer.wordpress.org/reference/functions/add_menu_page/
+	 * @link   https://developer.wordpress.org/reference/functions/add_submenu_page/
 	 *
 	 * @todo  Think about whether this is a good idea. Maybe it's
 	 *        better to simply provide a sample ACF page. ACF is
@@ -81,27 +89,52 @@ class Settings_Page_Site {
 	 */
     public function settings_page() {
 
+		// If the Advanced Custom Fields Pro plugin is active.
 		if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
 
+			// Use the site name in the title tag but apply a filter for customization.
 			$title      = apply_filters( 'site_settings_page_name', get_bloginfo( 'name' ) );
-			$position   = get_field( 'burcon_settings_link_position', 'option' );
-			$link_label = get_field( 'burcon_site_settings_link_label', 'option' );
-			$link_icon  = get_field( 'burcon_site_settings_link_icon', 'option' );
 
+			/**
+			 * Get the options firelds related to the ACF settings page.
+			 *
+			 * @since  1.0.0
+			 */
+
+			// The position of the page in the admin menu (top-level or under Dashboard).
+			$position   = get_field( 'ccp_settings_link_position', 'option' );
+
+			// The label of the page in the admin menu.
+			$link_label = get_field( 'ccp_site_settings_link_label', 'option' );
+
+			// The icon used for the pagin in the admin menu.
+			$link_icon  = get_field( 'ccp_site_settings_link_icon', 'option' );
+
+			// Use the custom admin menu label if the field is not empty.
 			if ( $link_label ) {
 				$label = $link_label;
+
+			// Otherwise use "Site Settings" as the label.
 			}  else {
 				$label = __( 'Site Settings', 'burcon-plugin' );
 			}
 
+			// Use the custom admin menu icon if the field is not empty.
 			if ( $link_icon ) {
 				$icon = $link_icon;
+
+			// Otherwise use the Admin Settings icon.
 			}  else {
 				$icon = 'dashicons-admin-settings';
 			}
 
+			/**
+			 * If the ACF position has been set to top-level then create
+			 * a page with an icon and no parent, just under Dahboard (3).
+			 */
 			if ( 'top' == $position ) {
 
+				// Page arguments.
 				$settings = apply_filters( 'controlled_chaos_site_settings_page_top', [
 					'page_title' => $title . __( ' Settings', 'burcon-plugin' ),
 					'menu_title' => $label,
@@ -111,9 +144,17 @@ class Settings_Page_Site {
 					'capability' => 'manage_options',
 					'redirect'   => false
 				] );
+
+				// Add the settings page.
 				acf_add_options_page( $settings );
+
+				// Remove the default settings links at the bottom of the admin menu.
 				remove_menu_page( 'options-general.php' );
 
+			/**
+			 * If the ACF position is default then create a page without an icon and
+			 * no parent as a submenu page under Dahboard (index.php).
+			 */
 			} else {
 
 				$settings = apply_filters( 'controlled_chaos_site_settings_page_default', [
@@ -123,28 +164,52 @@ class Settings_Page_Site {
 					'parent'     => 'index.php',
 					'capability' => 'manage_options'
 				] );
+
+				// Add the settings page.
 				acf_add_options_page( $settings );
 
 			}
 
+		// If the Advanced Custom Fields Pro plugin is not active.
 		} else {
 
-			$link_label = sanitize_text_field( get_option( 'burcon_site_settings_link_label' ) );
-			$position   = get_option( 'burcon_site_settings_position' );
-			$link_icon  = sanitize_text_field( get_option( 'burcon_site_settings_link_icon' ) );
+			/**
+			 * Get the options firelds related to the WordPress settings page.
+			 *
+			 * @since  1.0.0
+			 */
 
+			// The position of the page in the admin menu (top-level or under Dashboard).
+			$position   = get_option( 'ccp_site_settings_position' );
+
+			// The label of the page in the admin menu.
+			$link_label = sanitize_text_field( get_option( 'ccp_site_settings_link_label' ) );
+
+			// The icon used for the pagin in the admin menu.
+			$link_icon  = sanitize_text_field( get_option( 'ccp_site_settings_link_icon' ) );
+
+			// Use the custom admin menu icon if the field is not empty.
 			if ( $link_label ) {
 				$label = $link_label;
+
+			// Otherwise use "Site Settings" as the label.
 			}  else {
 				$label = __( 'Site Settings', 'burcon-plugin' );
 			}
 
+			// Use the custom admin menu icon if the field is not empty.
 			if ( $link_icon ) {
 				$icon = $link_icon;
+
+			// Otherwise use the Admin Settings icon.
 			}  else {
 				$icon = __( 'dashicons-admin-settings', 'burcon-plugin' );
 			}
 
+			/**
+			 * If the position has been set to top-level then create a page
+			 * with an icon and no parent, just under Dahboard (3).
+			 */
 			if ( $position ) {
 				add_menu_page(
 					$label,
@@ -155,6 +220,14 @@ class Settings_Page_Site {
 					$icon,
 					3
 				);
+
+				// Remove the default settings links at the bottom of the admin menu.
+				remove_menu_page( 'options-general.php' );
+
+			/**
+			 * If the position is default then create a page without an icon and
+			 * no parent as a submenu page under Dahboard (index.php).
+			 */
 			} else {
 				add_submenu_page(
 					'index.php',
@@ -164,6 +237,30 @@ class Settings_Page_Site {
 					BURCON_ADMIN_SLUG . '-settings',
 					[ $this, 'page_output' ]
 				);
+			}
+
+			// Redirect to new settings page URL when menu position is changed.
+			if ( isset( $_GET['page'] ) ) {
+
+				// Get the current admin screen URL.
+				global $pagenow;
+
+				// If on the Dashboard submenu page and top level option is selected.
+				if (
+					$position
+					&& in_array( $pagenow, [ 'index.php' ] )
+					&& ( $_GET['page'] == BURCON_ADMIN_SLUG . '-settings' )
+				) {
+					wp_redirect( admin_url( 'admin.php?page=' . BURCON_ADMIN_SLUG . '-settings&tab=admin-menu' ), 302 );
+
+				// If on the top level page and top level option is not selected.
+				} elseif (
+					! $position
+					&& in_array( $pagenow, [ 'admin.php' ] )
+					&& ( $_GET['page'] == BURCON_ADMIN_SLUG . '-settings' )
+				) {
+					wp_redirect( admin_url( 'index.php?page=' . BURCON_ADMIN_SLUG . '-settings&tab=admin-menu' ), 302 );
+				}
 			}
 
 		}
@@ -179,7 +276,8 @@ class Settings_Page_Site {
 	 */
     public function page_output() {
 
-		require plugin_dir_path( __FILE__ ) . 'partials/settings-page-site.php';
+		// Get the partial that contains the settings page HTML.
+		require BURCON_PATH . 'admin/partials/settings-page-site.php';
 
 	}
 
@@ -192,11 +290,11 @@ class Settings_Page_Site {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_settings_page_site() {
+function ccp_settings_page_site() {
 
 	return Settings_Page_Site::instance();
 
 }
 
 // Run an instance of the class.
-burcon_settings_page_site();
+ccp_settings_page_site();

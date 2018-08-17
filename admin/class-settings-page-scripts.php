@@ -2,14 +2,14 @@
 /**
  * Settings page for script loading and more.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin;
+namespace CC_Plugin\Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Settings_Page_Scripts {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -96,7 +96,7 @@ class Settings_Page_Scripts {
 	 */
     public function page_output() {
 
-		require plugin_dir_path( __FILE__ ) . 'partials/settings-page-scripts.php';
+		require BURCON_PATH . 'admin/partials/settings-page-scripts.php';
 
 	}
 
@@ -155,7 +155,7 @@ class Settings_Page_Scripts {
      */
 	public function help_inline_scripts() {
 
-		include_once plugin_dir_path( __FILE__ ) . 'partials/help/help-inline-scripts.php';
+		include_once BURCON_PATH . 'admin/partials/help/help-inline-scripts.php';
 
 	}
 
@@ -168,7 +168,7 @@ class Settings_Page_Scripts {
      */
 	public function help_inline_jquery() {
 
-		include_once plugin_dir_path( __FILE__ ) . 'partials/help/help-inline-jquery.php';
+		include_once BURCON_PATH . 'admin/partials/help/help-inline-jquery.php';
 
 	}
 
@@ -181,7 +181,7 @@ class Settings_Page_Scripts {
      */
 	public function help_remove_emoji() {
 
-		include_once plugin_dir_path( __FILE__ ) . 'partials/help/help-remove-emoji.php';
+		include_once BURCON_PATH . 'admin/partials/help/help-remove-emoji.php';
 
 	}
 
@@ -214,11 +214,11 @@ class Settings_Page_Scripts {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_settings_page_scripts() {
+function ccp_settings_page_scripts() {
 
 	return Settings_Page_Scripts::instance();
 
 }
 
 // Run an instance of the class.
-burcon_settings_page_scripts();
+ccp_settings_page_scripts();

@@ -4,7 +4,7 @@
  *
  * This file must not be namespaced.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Includes
  *
  * @since      1.0.0
@@ -22,10 +22,10 @@ if ( ! defined( 'WPINC' ) ) {
  * @since  1.0.0
  * @access public
  */
-class Controlled_Chaos_Activate {
+class Burcon_Outfitters_Activate {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -40,6 +40,9 @@ class Controlled_Chaos_Activate {
 
 			// Set variable for new instance.
 			$instance = new self;
+
+			// Activation function
+			$instance->activate();
 
 		}
 
@@ -75,8 +78,8 @@ class Controlled_Chaos_Activate {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_activate() {
+function ccp_activate() {
 
-	return Controlled_Chaos_Activate::instance();
+	return Burcon_Outfitters_Activate::instance();
 
 }

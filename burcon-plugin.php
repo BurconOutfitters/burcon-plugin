@@ -1,27 +1,43 @@
 <?php
 /**
- * Burcon Outfitters plugin
+ * Burcon Outfitters starter plugin
  *
  * Change this header information to suit your needs.
  *
- * @package     Burcon_Plugin
+ * @package     Burcon_Outfitters_Plugin
  * @version     1.0.0
  * @author      Greg Sweet <greg@ccdzine.com>
  * @copyright   Copyright © 2018, Greg Sweet
- * @link        https://github.com/ControlledChaos/burcon-plugin
+ * @link        https://github.com/BurconOutfitters/burcon-plugin
  * @license     GPL-3.0+ http://www.gnu.org/licenses/gpl-3.0.txt
  *
- * Plugin Name: Burcon Outfitters
- * Plugin URI:  https://github.com/ControlledChaos/burcon-plugin
- * Description: The base plugin for the Burcon Outfitters suite of websites.
- * Version:     1.0.0
- * Author:      Controlled Chaos Design
- * Author URI:  http://ccdzine.com/
- * License:     GPL-3.0+
- * License URI: https://www.gnu.org/licenses/gpl.txt
- * Text Domain: burcon-plugin
- * Domain Path: /languages
+ * Plugin Name:  Burcon Outfitters Plugin
+ * Plugin URI:   https://github.com/BurconOutfitters/burcon-plugin
+ * Description:  A WordPress starter/boilerplate for site-specific plugins.
+ * Version:      1.0.0
+ * Author:       Controlled Chaos Design
+ * Author URI:   http://ccdzine.com/
+ * License:      GPL-3.0+
+ * License URI:  https://www.gnu.org/licenses/gpl.txt
+ * Text Domain:  burcon-plugin
+ * Domain Path:  /languages
+ * Tested up to: 4.9.8
  */
+
+/*
+Burcon Outfitters Plugin is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+any later version.
+
+Burcon Outfitters Plugin is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Burcon Outfitters Plugin. If not, see {URI to Plugin License}.
+*/
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -29,60 +45,18 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Keeping the version at 1.0.0 as this is a starter plugin but
- * you may want to start counting as you develop for your use case.
- *
- * @since  1.0.0
- * @return string Returns the latest plugin version.
- */
-if ( ! defined( 'BURCON_VERSION' ) ) {
-	define( 'BURCON_VERSION', '1.0.0' );
-}
-
-/**
- * Universal slug partial for admin pages.
- *
- * This URL slug is used for various plugin admin & settings pages.
- *
- * The prefix will change in your search & replace in renaming the plugin.
- * Change the second part of the define(), here as 'burcon-plugin',
- * to your preferred page slug.
- *
- * @since  1.0.0
- * @return string Returns the URL slug of the admin pages.
- */
-if ( ! defined( 'BURCON_ADMIN_SLUG' ) ) {
-	define( 'BURCON_ADMIN_SLUG', 'burcon-plugin' );
-}
-
-/**
- * Define default meta image path.
- *
- * Change the path and file name to suit your needs.
- *
- * @since  1.0.0
- * @return string Returns the URL of the image.
- */
-if ( ! defined( 'BURCON_DEFAULT_META_IMAGE' ) ) {
-	define(
-		'BURCON_DEFAULT_META_IMAGE',
-		plugins_url( 'frontend/assets/images/default-meta-image.jpg', __FILE__ )
-	);
-}
-
-/**
  * The core plugin class.
  *
- * Simply gets the initialization class file plus the
- * activation and deactivation classes.
+ * Defines constants, gets the initialization class file
+ * plus the activation and deactivation classes.
  *
  * @since  1.0.0
  * @access public
  */
-class Burcon_Plugin {
+final class Burcon_Outfitters_Plugin {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -98,8 +72,12 @@ class Burcon_Plugin {
 			// Set variable for new instance.
 			$instance = new self;
 
+			// Define plugin constants.
+			$instance->constants();
+
 			// Require the core plugin class files.
 			$instance->dependencies();
+
 		}
 
 		// Return the instance.
@@ -111,10 +89,113 @@ class Burcon_Plugin {
 	 * Constructor method.
 	 *
 	 * @since  1.0.0
-	 * @access public
+	 * @access private
 	 * @return void Constructor method is empty.
 	 */
-	public function __construct() {}
+	private function __construct() {}
+
+	/**
+	 * Throw error on object clone.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function __clone() {
+
+		// Cloning instances of the class is forbidden.
+		_doing_it_wrong( __FUNCTION__, __( 'This is not allowed.', 'burcon-plugin' ), '1.0.0' );
+
+	}
+
+	/**
+	 * Disable unserializing of the class.
+	 *
+	 * @since  1.0.0
+	 * @access public
+	 * @return void
+	 */
+	public function __wakeup() {
+
+		// Unserializing instances of the class is forbidden.
+		_doing_it_wrong( __FUNCTION__, __( 'This is not allowed.', 'burcon-plugin' ), '1.0.0' );
+
+	}
+
+	/**
+	 * Define plugin constants.
+	 *
+	 * @since  1.0.0
+	 * @access private
+	 * @return void
+	 */
+	private function constants() {
+
+		/**
+		 * Keeping the version at 1.0.0 as this is a starter plugin but
+		 * you may want to start counting as you develop for your use case.
+		 *
+		 * @since  1.0.0
+		 * @return string Returns the latest plugin version.
+		 */
+		if ( ! defined( 'BURCON_VERSION' ) ) {
+			define( 'BURCON_VERSION', '1.0.0' );
+		}
+
+		/**
+		 * Plugin folder path.
+		 *
+		 * @since  1.0.0
+		 * @return string Returns the filesystem directory path (with trailing slash)
+		 *                for the plugin __FILE__ passed in.
+		 */
+		if ( ! defined( 'BURCON_PATH' ) ) {
+			define( 'BURCON_PATH', plugin_dir_path( __FILE__ ) );
+		}
+
+		/**
+		 * Plugin folder URL.
+		 *
+		 * @since  1.0.0
+		 * @return string Returns the URL directory path (with trailing slash)
+		 *                for the plugin __FILE__ passed in.
+		 */
+		if ( ! defined( 'BURCON_URL' ) ) {
+			define( 'BURCON_URL', plugin_dir_url( __FILE__ ) );
+		}
+
+		/**
+		 * Universal slug partial for admin pages.
+		 *
+		 * This URL slug is used for various plugin admin & settings pages.
+		 *
+		 * The prefix will change in your search & replace in renaming the plugin.
+		 * Change the second part of the define(), here as 'burcon-plugin',
+		 * to your preferred page slug.
+		 *
+		 * @since  1.0.0
+		 * @return string Returns the URL slug of the admin pages.
+		 */
+		if ( ! defined( 'BURCON_ADMIN_SLUG' ) ) {
+			define( 'BURCON_ADMIN_SLUG', 'burcon-plugin' );
+		}
+
+		/**
+		 * Define default meta image path.
+		 *
+		 * Change the path and file name to suit your needs.
+		 *
+		 * @since  1.0.0
+		 * @return string Returns the URL of the image.
+		 */
+		if ( ! defined( 'BURCON_DEFAULT_META_IMAGE' ) ) {
+			define(
+				'BURCON_DEFAULT_META_IMAGE',
+				plugins_url( 'frontend/assets/images/default-meta-image.jpg', __FILE__ )
+			);
+		}
+
+	}
 
 	/**
 	 * Require the core plugin class files.
@@ -126,13 +207,13 @@ class Burcon_Plugin {
 	private function dependencies() {
 
 		// The hub of all other dependency files.
-		require_once plugin_dir_path( __FILE__ ) . 'includes/class-init.php';
+		require_once BURCON_PATH . 'includes/class-init.php';
 
 		// Include the activation class.
-		require_once plugin_dir_path( __FILE__ ) . 'includes/class-activate.php';
+		require_once BURCON_PATH . 'includes/class-activate.php';
 
 		// Include the deactivation class.
-		require_once plugin_dir_path( __FILE__ ) . 'includes/class-deactivate.php';
+		require_once BURCON_PATH . 'includes/class-deactivate.php';
 
 	}
 
@@ -144,16 +225,16 @@ class Burcon_Plugin {
  *
  * @since  1.0.0
  * @access public
- * @return object Returns the instance of the `Burcon_Plugin` class.
+ * @return object Returns the instance of the `Burcon_Outfitters_Plugin` class.
  */
-function burcon_plugin() {
+function ccp_plugin() {
 
-	return Burcon_Plugin::instance();
+	return Burcon_Outfitters_Plugin::instance();
 
 }
 
 // Begin plugin functionality.
-burcon_plugin();
+ccp_plugin();
 
 /**
  * Register the activaction & deactivation hooks.
@@ -162,8 +243,8 @@ burcon_plugin();
  * @access public
  * @return void
  */
-register_activation_hook( __FILE__, '\activate_controlled_chaos' );
-register_deactivation_hook( __FILE__, '\deactivate_controlled_chaos' );
+register_activation_hook( __FILE__, '\ccp_activate_plugin' );
+register_deactivation_hook( __FILE__, '\ccp_deactivate_plugin' );
 
 /**
  * The code that runs during plugin activation.
@@ -172,10 +253,10 @@ register_deactivation_hook( __FILE__, '\deactivate_controlled_chaos' );
  * @access public
  * @return void
  */
-function activate_controlled_chaos() {
+function ccp_activate_plugin() {
 
 	// Run the activation class.
-	burcon_activate();
+	ccp_activate();
 
 }
 
@@ -186,10 +267,10 @@ function activate_controlled_chaos() {
  * @access public
  * @return void
  */
-function deactivate_controlled_chaos() {
+function ccp_deactivate_plugin() {
 
 	// Run the deactivation class.
-	burcon_deactivate();
+	ccp_deactivate();
 
 }
 
@@ -203,35 +284,80 @@ function deactivate_controlled_chaos() {
  * If you would like to link the page elsewhere as you make it your own then
  * do so in admin/class-admin-pages.php, in the about_plugin method.
  *
+ * Uses the universal slug partial for admin pages. Set this
+ * slug in the core plugin file.
+ *
  * @param  array $links Default plugin links on the 'Plugins' admin page.
  * @since  1.0.0
  * @access public
- * @return mixed[] Returns an HTML string for the settings page link.
- *                 Returns an array of the settings link with the default plugin links.
+ * @return mixed[] Returns an HTML string for the about page link.
+ *                 Returns an array of the about link with the default plugin links.
  * @link   https://codex.wordpress.org/Plugin_API/Filter_Reference/plugin_action_links_(plugin_file_name)
  */
-function controlled_chaos_about_link( $links ) {
+function ccp_about_link( $links ) {
 
-	// Create new settings link array as a variable.
-	$about_page = [
-		sprintf(
-			'<a href="%1s" class="' . BURCON_ADMIN_SLUG . '-page-link">%2s</a>',
-			admin_url( 'plugins.php?page=' . BURCON_ADMIN_SLUG . '-page' ),
-			esc_attr( 'Documentation', 'burcon-plugin' )
-		),
-	];
+	/**
+	 * Site about page link depends on the admin menu setting.
+	 *
+	 * @since  1.0.0
+	 * @return string returns the URL of the page with parent or not.
+	 */
 
-	// Merge the new settings array with the default array.
-	return array_merge( $about_page, $links );
+	if ( is_admin() ) {
+
+		// If Advanced Custom Fields is active.
+		if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
+
+			// Get the field.
+			$acf_position = get_field( 'ccp_site_plugin_link_position', 'option' );
+
+			// Return true if the field is set to `top`.
+			if ( 'top' == $acf_position ) {
+				$position = true;
+
+			// Otherwise return `false`.
+			} else {
+				$position = false;
+			}
+
+		// If ACF is not active, get the field from the WordPress options page.
+		} else {
+
+			// Get the field.
+			$position = get_option( 'ccp_site_plugin_link_position' );
+		}
+
+		if ( true == $position ) {
+			$url = admin_url( 'index.php?page=' . BURCON_ADMIN_SLUG . '-settings' );
+		} else {
+			$url = admin_url( 'admin.php?page=' . BURCON_ADMIN_SLUG . '-settings' );
+		}
+
+		// Create new settings link array as a variable.
+		$about_page = [
+			sprintf(
+				'<a href="%1s" class="' . BURCON_ADMIN_SLUG . '-page-link">%2s</a>',
+				admin_url( 'plugins.php?page=' . BURCON_ADMIN_SLUG . '-page' ),
+				esc_attr( 'Documentation', 'burcon-plugin' )
+			),
+		];
+
+		// Merge the new settings array with the default array.
+		return array_merge( $about_page, $links );
+
+	}
 
 }
 // Filter the default settings links with new array.
-add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'controlled_chaos_about_link' );
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'ccp_about_link' );
 
 /**
  * Add links to the plugin settings pages on the plugins page.
  *
  * Change the links to those which fill your needs.
+ *
+ * Uses the universal slug partial for admin pages. Set this
+ * slug in the core plugin file.
  *
  * @param  array  $links Default plugin links on the 'Plugins' admin page.
  * @param  object $file Reference the root plugin file with header.
@@ -240,26 +366,73 @@ add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'controlled_ch
  *                 Returns an array of custom links with the default plugin links.
  * @link   https://codex.wordpress.org/Plugin_API/Filter_Reference/plugin_action_links_(plugin_file_name)
  */
-function controlled_chaos_settings_links( $links, $file ) {
+function ccp_settings_links( $links, $file ) {
 
-	if ( $file == plugin_basename( __FILE__ ) ) {
+	if ( is_admin() ) {
 
-		// Add links to settings pages.
-		$links[] = sprintf(
-			'<a href="%1s" class="' . BURCON_ADMIN_SLUG . '-settings-link">%2s</a>',
-			admin_url( 'options-general.php?page=' . BURCON_ADMIN_SLUG . '-settings' ),
-			esc_attr( 'Site Settings', 'burcon-plugin' )
-		);
-		$links[] = sprintf(
-			'<a href="%1s" class="' . BURCON_ADMIN_SLUG . '-scripts-link">%2s</a>',
-			admin_url( 'options-general.php?page=' . BURCON_ADMIN_SLUG . '-scripts' ),
-			esc_attr( 'Script Options', 'burcon-plugin' )
-		);
+		/**
+		 * Site settings page link depends on the admin menu setting.
+		 *
+		 * @since  1.0.0
+		 * @return string returns the URL of the page with parent or not.
+		 */
+
+		// If Advanced Custom Fields is active.
+		if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
+
+			// Get the field.
+			$acf_position = get_field( 'ccp_settings_link_position', 'option' );
+
+			// Return true if the field is set to `top`.
+			if ( 'top' == $acf_position ) {
+				$position = true;
+
+			// Otherwise return `false`.
+			} else {
+				$position = false;
+			}
+
+		// If ACF is not active, get the field from the WordPress options page.
+		} else {
+
+			// Get the field.
+			$position = get_option( 'ccp_site_settings_position' );
+		}
+
+		if ( $position || true == $position ) {
+			$url = admin_url( 'admin.php?page=' . BURCON_ADMIN_SLUG . '-settings' );
+		} else {
+			$url = admin_url( 'index.php?page=' . BURCON_ADMIN_SLUG . '-settings' );
+		}
+
+		if ( $file == plugin_basename( __FILE__ ) ) {
+
+			// Add links to settings pages.
+			$links[] = sprintf(
+				'<a href="%1s" class="' . BURCON_ADMIN_SLUG . '-settings-link">%2s</a>',
+				$url,
+				esc_attr( 'Site Settings', 'burcon-plugin' )
+			);
+			$links[] = sprintf(
+				'<a href="%1s" class="' . BURCON_ADMIN_SLUG . '-scripts-link">%2s</a>',
+				admin_url( 'options-general.php?page=' . BURCON_ADMIN_SLUG . '-scripts' ),
+				esc_attr( 'Script Options', 'burcon-plugin' )
+			);
+
+			// Add a placeholder for an upgrade link.
+			$links[] = sprintf(
+				'<a href="%1s" title="%2s" class="' . BURCON_ADMIN_SLUG . '-upgrade-link" style="color: #888; cursor: default;">%3s</a>',
+				''/* Add upgrade URL here */,
+				__( 'Upgrade not available', 'burcon-plugin' ),
+				esc_attr( 'Upgrade', 'burcon-plugin' )
+			);
+
+		}
+
+		// Return the full array of links.
+		return $links;
 
 	}
 
-	// Return the full array of links.
-	return $links;
-
 }
-add_filter( 'plugin_row_meta', 'controlled_chaos_settings_links', 10, 2 );
+add_filter( 'plugin_row_meta', 'ccp_settings_links', 10, 2 );

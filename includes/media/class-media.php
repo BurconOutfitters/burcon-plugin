@@ -2,14 +2,14 @@
 /**
  * Media functionality.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Includes\Media
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Includes\Media;
+namespace CC_Plugin\Includes\Media;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Media {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -88,13 +88,13 @@ class Media {
 	private function dependencies() {
 
 		// Add SVG media upload support.
-		include_once plugin_dir_path( dirname( __FILE__ ) ) . 'media/class-svg-support.php';
+		include_once BURCON_PATH . 'includes/media/class-svg-support.php';
 
 		// Replace WP gallery shortcode if Fancybox option is used.
-		$fancybox = get_option( 'burcon_enqueue_fancybox_script' );
+		$fancybox = get_option( 'ccp_enqueue_fancybox_script' );
 
 		if ( $fancybox ) {
-			require_once plugin_dir_path( __FILE__ ) . 'class-gallery-shortcode.php';
+			require_once BURCON_PATH . 'includes/media/class-gallery-shortcode.php';
 		}
 
 	}
@@ -140,7 +140,7 @@ class Media {
 			$string = '/<a href="(.*?).(jpg|jpeg|png|gif|bmp|ico)"><img(.*?)class="(.*?)wp-image-(.*?)" \/><\/a>/i';
 			preg_match_all( $string, $content, $matches, PREG_SET_ORDER );
 
-			if ( get_option( 'burcon_enqueue_fancybox_script' ) ) {
+			if ( get_option( 'ccp_enqueue_fancybox_script' ) ) {
 
 				// Check which attachment is referenced.
 				foreach ( $matches as $val ) {
@@ -224,7 +224,7 @@ class Media {
 		global $post;
 
 		// Apply a filter for conditional image sizes.
-		$size = apply_filters( 'burcon_rss_featured_image_size', 'medium' );
+		$size = apply_filters( 'ccp_rss_featured_image_size', 'medium' );
 
 		/**
 		 * Use this layout only if the post has a featured image.
@@ -249,11 +249,11 @@ class Media {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_media() {
+function ccp_media() {
 
 	return Media::instance();
 
 }
 
 // Run an instance of the class.
-burcon_media();
+ccp_media();

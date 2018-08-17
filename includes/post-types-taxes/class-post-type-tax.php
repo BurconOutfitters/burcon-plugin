@@ -2,14 +2,14 @@
 /**
  * Post types and taxonomies.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Includes\Post_Types_Taxes
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Includes\Post_Types_Taxes;
+namespace CC_Plugin\Includes\Post_Types_Taxes;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Post_Types_Taxes {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -70,13 +70,16 @@ class Post_Types_Taxes {
 	public function dependencies() {
 
 		// Resister cutsom post types.
-		require_once plugin_dir_path( __FILE__ ) . 'class-register-post-types.php';
+		require_once BURCON_PATH . 'includes/post-types-taxes/class-register-post-types.php';
+
+		// Resister cutsom taxonomies.
+		require_once BURCON_PATH . 'includes/post-types-taxes/class-register-taxonomies.php';
 
 		// Functions related to post types and taxonomies.
-		require_once plugin_dir_path( __FILE__ ) . 'class-post-type-tax-functions.php';
+		require_once BURCON_PATH . 'includes/post-types-taxes/class-post-type-tax-functions.php';
 
 		// Capability to add custom taxonomy templates.
-		require_once plugin_dir_path( __FILE__ ) . 'class-taxonomy-templates.php';
+		require_once BURCON_PATH . 'includes/post-types-taxes/class-taxonomy-templates.php';
 
 	}
 
@@ -89,11 +92,11 @@ class Post_Types_Taxes {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_types_taxes() {
+function ccp_types_taxes() {
 
 	return Post_Types_Taxes::instance();
 
 }
 
 // Run an instance of the class.
-burcon_types_taxes();
+ccp_types_taxes();

@@ -2,7 +2,10 @@
 /**
  * Content for the Welcome Panel help tab.
  *
- * @package    Burcon_Plugin
+ * Uses the universal slug partial for admin pages. Set this
+ * slug in the core plugin file.
+ *
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin\Partials\Help
  *
  * @since      1.0.0
@@ -12,7 +15,7 @@
  *             panel is ready to use.
  */
 
-namespace Burcon_Plugin\Admin\Dashboard\Partials\Help;
+namespace CC_Plugin\Admin\Dashboard\Partials\Help;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

@@ -2,14 +2,14 @@
 /**
  * Welcome panel functionality.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin\Dashboard
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin\Dashboard;
+namespace CC_Plugin\Admin\Dashboard;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Welcome {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -64,16 +64,36 @@ class Welcome {
 		 */
 
 		// If ACF is active, get the field from the ACF options page.
-		add_action( 'admin_head', [ $this, 'dismiss' ] );
+		if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
+			$dismiss = get_field( 'ccp_remove_welcome_dismiss', 'option' );
+
+		// If ACF is not active, get the field from the WordPress options page.
+		} else {
+			$dismiss = get_option( 'ccp_remove_welcome_dismiss' );
+		}
+
+		if ( $dismiss ) {
+			add_action( 'admin_head', [ $this, 'dismiss' ] );
+		}
 
 		// Register the welcome panel areas.
 		add_action( 'widgets_init', [ $this, 'widget_areas' ], 25 );
 
 		/**
-		 * Use a custom Welcome panel.
+		 * Use the custom Welcome panel if option selected.
 		 */
-		remove_action( 'welcome_panel', 'wp_welcome_panel' );
-		add_action( 'welcome_panel', [ $this, 'welcome_panel' ], 25 );
+
+		// If ACF is active, get the field from the ACF options page.
+		if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
+			$welcome = get_field( 'ccp_custom_welcome', 'option' );
+		} else {
+			$welcome = get_option( 'ccp_custom_welcome' );
+		}
+
+		if ( $welcome ) {
+			remove_action( 'welcome_panel', 'wp_welcome_panel' );
+			add_action( 'welcome_panel', [ $this, 'welcome_panel' ], 25 );
+		}
 
 	}
 
@@ -116,7 +136,7 @@ class Welcome {
 
 		register_sidebar( [
 			'name'          => __( 'Welcome Panel - First Area', 'burcon-plugin' ),
-			'id'            => 'burcon_welcome_widget_first',
+			'id'            => 'ccp_welcome_widget_first',
 			'description'   => __( '', 'burcon-plugin' ),
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</div>',
@@ -126,7 +146,7 @@ class Welcome {
 
 		register_sidebar( [
 			'name'          => __( 'Welcome Panel - Second Area', 'burcon-plugin' ),
-			'id'            => 'burcon_welcome_widget_second',
+			'id'            => 'ccp_welcome_widget_second',
 			'description'   => __( '', 'burcon-plugin' ),
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</div>',
@@ -136,7 +156,7 @@ class Welcome {
 
 		register_sidebar( [
 			'name'          => __( 'Welcome Panel - Third Area', 'burcon-plugin' ),
-			'id'            => 'burcon_welcome_widget_last',
+			'id'            => 'ccp_welcome_widget_last',
 			'description'   => __( '', 'burcon-plugin' ),
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</div>',
@@ -155,7 +175,7 @@ class Welcome {
 	 */
 	public function welcome_panel() {
 
-		include_once plugin_dir_path( __FILE__ ) . 'partials/welcome-panel.php';
+		include_once BURCON_PATH . 'admin/dashboard/partials/welcome-panel.php';
 
 	}
 
@@ -168,11 +188,11 @@ class Welcome {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_welcome() {
+function ccp_welcome() {
 
 	return Welcome::instance();
 
 }
 
 // Run an instance of the class.
-burcon_welcome();
+ccp_welcome();

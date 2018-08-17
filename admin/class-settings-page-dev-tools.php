@@ -6,14 +6,14 @@
  * at which several tools for the website development process
  * are provieded.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin;
+namespace CC_Plugin\Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -29,7 +29,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Settings_Page_Dev_Tools {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -103,7 +103,7 @@ class Settings_Page_Dev_Tools {
 	 */
 	public function page_output() {
 
-		require plugin_dir_path( __FILE__ ) . 'partials/settings-page-development.php';
+		require BURCON_PATH . 'admin/partials/settings-page-development.php';
 
 	}
 
@@ -146,7 +146,7 @@ class Settings_Page_Dev_Tools {
      */
 	public function help_dev_info_output() {
 
-		include_once plugin_dir_path( __FILE__ ) . 'partials/help/help-dev-info.php';
+		include_once BURCON_PATH . 'admin/partials/help/help-dev-info.php';
 
     }
 
@@ -174,11 +174,11 @@ class Settings_Page_Dev_Tools {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_settings_page_dev_tools() {
+function ccp_settings_page_dev_tools() {
 
 	return Settings_Page_Dev_Tools::instance();
 
 }
 
 // Run an instance of the class.
-burcon_settings_page_dev_tools();
+ccp_settings_page_dev_tools();

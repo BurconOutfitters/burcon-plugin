@@ -2,14 +2,14 @@
 /**
  * Define the internationalization functionality.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Includes
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Includes;
+namespace CC_Plugin\Includes;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -28,7 +28,7 @@ if ( ! defined( 'WPINC' ) ) {
 class i18n {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -58,10 +58,10 @@ class i18n {
 	 * Constructor method.
 	 *
 	 * @since  1.0.0
-	 * @access public
+	 * @access private
 	 * @return void Constructor method is empty.
 	 */
-	public function __construct() {}
+	private function __construct() {}
 
 	/**
 	 * Load the plugin text domain for translation.
@@ -89,11 +89,11 @@ class i18n {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_i18n() {
+function ccp_i18n() {
 
 	return i18n::instance();
 
 }
 
 // Run an instance of the class.
-burcon_i18n();
+ccp_i18n();

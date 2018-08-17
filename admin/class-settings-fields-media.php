@@ -2,14 +2,14 @@
 /**
  * Settings fields for media options.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin;
+namespace CC_Plugin\Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Settings_Fields_Media {
 
     /**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -77,52 +77,52 @@ class Settings_Fields_Media {
         /**
          * Image crop settings.
          */
-        add_settings_field( 'burcon_hard_crop_medium', __( 'Medium size crop', 'burcon-plugin' ), [ $this, 'medium_crop' ], 'media', 'default', [ __( 'Crop thumbnail to exact dimensions (normally thumbnails are proportional)', 'burcon-plugin' ) ] );
+        add_settings_field( 'ccp_hard_crop_medium', __( 'Medium size crop', 'burcon-plugin' ), [ $this, 'medium_crop' ], 'media', 'default', [ __( 'Crop thumbnail to exact dimensions (normally thumbnails are proportional)', 'burcon-plugin' ) ] );
 
-        add_settings_field( 'burcon_hard_crop_large', __( 'Large size crop', 'burcon-plugin' ), [ $this, 'large_crop' ], 'media', 'default', [ __( 'Crop thumbnail to exact dimensions (normally thumbnails are proportional)', 'burcon-plugin' ) ] );
+        add_settings_field( 'ccp_hard_crop_large', __( 'Large size crop', 'burcon-plugin' ), [ $this, 'large_crop' ], 'media', 'default', [ __( 'Crop thumbnail to exact dimensions (normally thumbnails are proportional)', 'burcon-plugin' ) ] );
 
         register_setting(
             'media',
-            'burcon_hard_crop_medium'
+            'ccp_hard_crop_medium'
         );
 
         register_setting(
             'media',
-            'burcon_hard_crop_large'
+            'ccp_hard_crop_large'
         );
 
         /**
          * SVG options.
          */
-        add_settings_section( 'burcon-svg-settings', __( 'SVG Images', 'burcon-plugin' ), [ $this, 'svg_notice' ], 'media' );
+        add_settings_section( 'ccp-svg-settings', __( 'SVG Images', 'burcon-plugin' ), [ $this, 'svg_notice' ], 'media' );
 
-        add_settings_field( 'burcon_add_svg_support', __( 'SVG Support', 'burcon-plugin' ), [ $this, 'svg_support' ], 'media', 'burcon-svg-settings', [ __( 'Add ability to upload SVG images to the media library.', 'burcon-plugin' ) ] );
+        add_settings_field( 'ccp_add_svg_support', __( 'SVG Support', 'burcon-plugin' ), [ $this, 'svg_support' ], 'media', 'ccp-svg-settings', [ __( 'Add ability to upload SVG images to the media library.', 'burcon-plugin' ) ] );
 
         register_setting(
             'media',
-            'burcon_add_svg_support'
+            'ccp_add_svg_support'
         );
 
         /**
          * Fancybox settings.
          */
-        add_settings_section( 'burcon-media-settings', __( 'Fancybox', 'burcon-plugin' ), [ $this, 'fancybox_description' ], 'media' );
+        add_settings_section( 'ccp-media-settings', __( 'Fancybox', 'burcon-plugin' ), [ $this, 'fancybox_description' ], 'media' );
 
-        add_settings_field( 'burcon_enqueue_fancybox_script', __( 'Enqueue Fancybox script', 'burcon-plugin' ), [ $this, 'fancybox_script' ], 'media', 'burcon-media-settings', [ __( 'Needed for lightbox functionality.', 'burcon-plugin' ) ] );
+        add_settings_field( 'ccp_enqueue_fancybox_script', __( 'Enqueue Fancybox script', 'burcon-plugin' ), [ $this, 'fancybox_script' ], 'media', 'ccp-media-settings', [ __( 'Needed for lightbox functionality.', 'burcon-plugin' ) ] );
 
         if ( ! current_theme_supports( 'ccd-fancybox' ) ) {
-            add_settings_field( 'burcon_enqueue_fancybox_styles', __( 'Enqueue Fancybox styles', 'burcon-plugin' ), [ $this, 'fancybox_styles' ], 'media', 'burcon-media-settings', [ __( 'Leave unchecked to use a custom stylesheet in a theme.', 'burcon-plugin' ) ] );
+            add_settings_field( 'ccp_enqueue_fancybox_styles', __( 'Enqueue Fancybox styles', 'burcon-plugin' ), [ $this, 'fancybox_styles' ], 'media', 'ccp-media-settings', [ __( 'Leave unchecked to use a custom stylesheet in a theme.', 'burcon-plugin' ) ] );
         }
 
         register_setting(
             'media',
-            'burcon_enqueue_fancybox_script'
+            'ccp_enqueue_fancybox_script'
         );
 
         if ( ! current_theme_supports( 'ccd-fancybox' ) ) {
             register_setting(
                 'media',
-                'burcon_enqueue_fancybox_styles'
+                'ccp_enqueue_fancybox_styles'
             );
         }
 
@@ -137,9 +137,9 @@ class Settings_Fields_Media {
      */
     public function medium_crop( $args ) {
 
-        $html = '<p><input type="checkbox" id="burcon_hard_crop_medium" name="burcon_hard_crop_medium" value="1" ' . checked( 1, get_option( 'burcon_hard_crop_medium' ), false ) . '/>';
+        $html = '<p><input type="checkbox" id="ccp_hard_crop_medium" name="ccp_hard_crop_medium" value="1" ' . checked( 1, get_option( 'ccp_hard_crop_medium' ), false ) . '/>';
 
-        $html .= '<label for="burcon_hard_crop_medium"> '  . $args[0] . '</label></p>';
+        $html .= '<label for="ccp_hard_crop_medium"> '  . $args[0] . '</label></p>';
 
         echo $html;
 
@@ -154,9 +154,9 @@ class Settings_Fields_Media {
      */
     public function large_crop( $args ) {
 
-        $html = '<p><input type="checkbox" id="burcon_hard_crop_large" name="burcon_hard_crop_large" value="1" ' . checked( 1, get_option( 'burcon_hard_crop_large' ), false ) . '/>';
+        $html = '<p><input type="checkbox" id="ccp_hard_crop_large" name="ccp_hard_crop_large" value="1" ' . checked( 1, get_option( 'ccp_hard_crop_large' ), false ) . '/>';
 
-        $html .= '<label for="burcon_hard_crop_large"> '  . $args[0] . '</label></p>';
+        $html .= '<label for="ccp_hard_crop_large"> '  . $args[0] . '</label></p>';
 
         echo $html;
 
@@ -171,13 +171,13 @@ class Settings_Fields_Media {
      */
     public function crop() {
 
-        if ( get_option( 'burcon_hard_crop_medium' ) ) {
+        if ( get_option( 'ccp_hard_crop_medium' ) ) {
             update_option( 'medium_crop', 1 );
         } else {
             update_option( 'medium_crop', 0 );
         }
 
-        if ( get_option( 'burcon_hard_crop_large' ) ) {
+        if ( get_option( 'ccp_hard_crop_large' ) ) {
             update_option( 'large_crop', 1 );
         } else {
             update_option( 'large_crop', 0 );
@@ -211,9 +211,9 @@ class Settings_Fields_Media {
      */
     public function svg_support( $args ) {
 
-        $html = '<p><input type="checkbox" id="burcon_add_svg_support" name="burcon_add_svg_support" value="1" ' . checked( 1, get_option( 'burcon_add_svg_support' ), false ) . '/>';
+        $html = '<p><input type="checkbox" id="ccp_add_svg_support" name="ccp_add_svg_support" value="1" ' . checked( 1, get_option( 'ccp_add_svg_support' ), false ) . '/>';
 
-        $html .= '<label for="burcon_add_svg_support"> '  . $args[0] . '</label></p>';
+        $html .= '<label for="ccp_add_svg_support"> '  . $args[0] . '</label></p>';
 
         echo $html;
 
@@ -244,9 +244,9 @@ class Settings_Fields_Media {
      */
     public function fancybox_script( $args ) {
 
-        $html = '<p><input type="checkbox" id="burcon_enqueue_fancybox_script" name="burcon_enqueue_fancybox_script" value="1" ' . checked( 1, get_option( 'burcon_enqueue_fancybox_script' ), false ) . '/>';
+        $html = '<p><input type="checkbox" id="ccp_enqueue_fancybox_script" name="ccp_enqueue_fancybox_script" value="1" ' . checked( 1, get_option( 'ccp_enqueue_fancybox_script' ), false ) . '/>';
 
-        $html .= '<label for="burcon_enqueue_fancybox_script"> '  . $args[0] . '</label></p>';
+        $html .= '<label for="ccp_enqueue_fancybox_script"> '  . $args[0] . '</label></p>';
 
         echo $html;
 
@@ -261,9 +261,9 @@ class Settings_Fields_Media {
      */
     public function fancybox_styles( $args ) {
 
-        $html = '<p><input type="checkbox" id="burcon_enqueue_fancybox_styles" name="burcon_enqueue_fancybox_styles" value="1" ' . checked( 1, get_option( 'burcon_enqueue_fancybox_styles' ), false ) . '/>';
+        $html = '<p><input type="checkbox" id="ccp_enqueue_fancybox_styles" name="ccp_enqueue_fancybox_styles" value="1" ' . checked( 1, get_option( 'ccp_enqueue_fancybox_styles' ), false ) . '/>';
 
-        $html .= '<label for="burcon_enqueue_fancybox_styles"> '  . $args[0] . '</label></p>';
+        $html .= '<label for="ccp_enqueue_fancybox_styles"> '  . $args[0] . '</label></p>';
 
         echo $html;
 
@@ -278,11 +278,11 @@ class Settings_Fields_Media {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_settings_fields_media() {
+function ccp_settings_fields_media() {
 
 	return Settings_Fields_Media::instance();
 
 }
 
 // Run an instance of the class.
-burcon_settings_fields_media();
+ccp_settings_fields_media();

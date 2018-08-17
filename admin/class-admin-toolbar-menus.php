@@ -2,14 +2,14 @@
 /**
  * Register admin toolbar menus.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin;
+namespace CC_Plugin\Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Admin_Toolbar_Menus {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -83,12 +83,12 @@ class Admin_Toolbar_Menus {
 
 		register_nav_menus(
 			[
-			'burcon_admin_toolbar_site'       => esc_html__( 'Admin Toolbar: Site Name', 'burcon-plugin' ),
-			'burcon_admin_toolbar_main'       => esc_html__( 'Admin Toolbar: Main', 'burcon-plugin' ),
-			'burcon_admin_toolbar_account'    => esc_html__( 'Admin Toolbar: My Account', 'burcon-plugin' ),
-			'burcon_frontend_toolbar_site'    => esc_html__( 'Frontend Toolbar: Site Name', 'burcon-plugin' ),
-			'burcon_frontend_toolbar_main'    => esc_html__( 'Frontend Toolbar: Main', 'burcon-plugin' ),
-			'burcon_frontend_toolbar_account' => esc_html__( 'Frontend Toolbar: My Account', 'burcon-plugin' )
+			'ccp_admin_toolbar_site'       => esc_html__( 'Admin Toolbar: Site Name', 'burcon-plugin' ),
+			'ccp_admin_toolbar_main'       => esc_html__( 'Admin Toolbar: Main', 'burcon-plugin' ),
+			'ccp_admin_toolbar_account'    => esc_html__( 'Admin Toolbar: My Account', 'burcon-plugin' ),
+			'ccp_frontend_toolbar_site'    => esc_html__( 'Frontend Toolbar: Site Name', 'burcon-plugin' ),
+			'ccp_frontend_toolbar_main'    => esc_html__( 'Frontend Toolbar: Main', 'burcon-plugin' ),
+			'ccp_frontend_toolbar_account' => esc_html__( 'Frontend Toolbar: My Account', 'burcon-plugin' )
 			]
 		);
 
@@ -103,9 +103,9 @@ class Admin_Toolbar_Menus {
 	 */
 	public function admin_menu_main( $wp_admin_bar ) {
 
-		if ( is_admin() && is_user_logged_in() && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'burcon_admin_toolbar_main' ] ) ) {
+		if ( is_admin() && is_user_logged_in() && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'ccp_admin_toolbar_main' ] ) ) {
 
-			$menu = wp_get_nav_menu_object( $locations[ 'burcon_admin_toolbar_main' ] );
+			$menu = wp_get_nav_menu_object( $locations[ 'ccp_admin_toolbar_main' ] );
 
 			if ( false != $menu ) {
 
@@ -161,9 +161,9 @@ class Admin_Toolbar_Menus {
 	 */
 	public function admin_menu_site( $wp_admin_bar ) {
 
-		if ( is_admin() && is_user_logged_in() && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'burcon_admin_toolbar_site' ] ) ) {
+		if ( is_admin() && is_user_logged_in() && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'ccp_admin_toolbar_site' ] ) ) {
 
-			$menu = wp_get_nav_menu_object( $locations[ 'burcon_admin_toolbar_site' ] );
+			$menu = wp_get_nav_menu_object( $locations[ 'ccp_admin_toolbar_site' ] );
 
 			if ( false != $menu ) {
 
@@ -220,9 +220,9 @@ class Admin_Toolbar_Menus {
 	 */
 	public function admin_menu_account( $wp_admin_bar ) {
 
-		if ( is_admin() && is_user_logged_in() && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'burcon_admin_toolbar_account' ] ) ) {
+		if ( is_admin() && is_user_logged_in() && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'ccp_admin_toolbar_account' ] ) ) {
 
-			$menu = wp_get_nav_menu_object( $locations[ 'burcon_admin_toolbar_account' ] );
+			$menu = wp_get_nav_menu_object( $locations[ 'ccp_admin_toolbar_account' ] );
 
 			if ( false != $menu ) {
 
@@ -279,9 +279,9 @@ class Admin_Toolbar_Menus {
 	 */
 	public function frontend_menu_main( $wp_admin_bar ) {
 
-		if ( ! is_admin() && is_user_logged_in() && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'burcon_frontend_toolbar_main' ] ) ) {
+		if ( ! is_admin() && is_user_logged_in() && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'ccp_frontend_toolbar_main' ] ) ) {
 
-			$menu = wp_get_nav_menu_object( $locations[ 'burcon_frontend_toolbar_main' ] );
+			$menu = wp_get_nav_menu_object( $locations[ 'ccp_frontend_toolbar_main' ] );
 
 			if ( false != $menu ) {
 
@@ -338,9 +338,9 @@ class Admin_Toolbar_Menus {
 	 */
 	public function frontend_menu_site( $wp_admin_bar ) {
 
-		if ( ! is_admin() && is_user_logged_in() && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'burcon_frontend_toolbar_site' ] ) ) {
+		if ( ! is_admin() && is_user_logged_in() && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'ccp_frontend_toolbar_site' ] ) ) {
 
-			$menu = wp_get_nav_menu_object( $locations[ 'burcon_frontend_toolbar_site' ] );
+			$menu = wp_get_nav_menu_object( $locations[ 'ccp_frontend_toolbar_site' ] );
 
 			if ( false != $menu ) {
 
@@ -397,9 +397,9 @@ class Admin_Toolbar_Menus {
 	 */
 	public function frontend_menu_account( $wp_admin_bar ) {
 
-		if ( ! is_admin() && is_user_logged_in() && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'burcon_frontend_toolbar_account' ] ) ) {
+		if ( ! is_admin() && is_user_logged_in() && ( $locations = get_nav_menu_locations() ) && isset( $locations[ 'ccp_frontend_toolbar_account' ] ) ) {
 
-			$menu = wp_get_nav_menu_object( $locations[ 'burcon_frontend_toolbar_account' ] );
+			$menu = wp_get_nav_menu_object( $locations[ 'ccp_frontend_toolbar_account' ] );
 
 			if ( false != $menu ) {
 
@@ -456,11 +456,11 @@ class Admin_Toolbar_Menus {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_admin_toolbar_menus() {
+function ccp_admin_toolbar_menus() {
 
 	return Admin_Toolbar_Menus::instance();
 
 }
 
 // Run an instance of the class.
-burcon_admin_toolbar_menus();
+ccp_admin_toolbar_menus();

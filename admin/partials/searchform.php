@@ -2,23 +2,23 @@
 /**
  * Backend search form template.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin\Partials
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin\Partials;
+namespace CC_Plugin\Admin\Partials;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-$label       = apply_filters( 'burcon_search_label', esc_html__( 'Search for:', 'burcon-plugin' ) );
-$placeholder = apply_filters( 'burcon_search_placeholder', esc_attr( esc_html__( 'Search ', 'burcon-plugin' ) . get_bloginfo( 'name' ) ) );
-$submit      = apply_filters( 'burcon_search_submit', esc_html__( 'Submit', 'burcon-plugin' ) );
+$label       = apply_filters( 'ccp_search_label', esc_html__( 'Search for:', 'burcon-plugin' ) );
+$placeholder = apply_filters( 'ccp_search_placeholder', esc_attr( esc_html__( 'Search ', 'burcon-plugin' ) . get_bloginfo( 'name' ) ) );
+$submit      = apply_filters( 'ccp_search_submit', esc_html__( 'Submit', 'burcon-plugin' ) );
 ?>
 <form class="search-form" role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
     <label class="search-label">

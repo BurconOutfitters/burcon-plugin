@@ -2,14 +2,14 @@
 /**
  * Author meta tag.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Frontend\Meta_Tags
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Frontend\Meta_Tags;
+namespace CC_Plugin\Frontend\Meta_Tags;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Meta_Author {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -58,7 +58,7 @@ class Meta_Author {
 	public function __construct() {
 
 		// Add author to the meta tag.
-		add_action( 'burcon_meta_author_tag', [ $this, 'author' ] );
+		add_action( 'ccp_meta_author_tag', [ $this, 'author' ] );
 
 	}
 
@@ -93,7 +93,7 @@ class Meta_Author {
 		}
 
 		// Apply a filter for conditional modification.
-		$author_tag = apply_filters( 'burcon_author_name', $author );
+		$author_tag = apply_filters( 'ccp_author_name', $author );
 
 		// Echo the author display name in the meta tag.
 		echo $author_tag;
@@ -109,11 +109,11 @@ class Meta_Author {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_meta_author() {
+function ccp_meta_author() {
 
 	return Meta_Author::instance();
 
 }
 
 // Run an instance of the class.
-burcon_meta_author();
+ccp_meta_author();

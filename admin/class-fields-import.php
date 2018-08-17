@@ -2,7 +2,7 @@
 /**
  * Import custom fields.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0
@@ -11,7 +11,7 @@
  * @link       https://github.com/BeAPI/ACF-PHP-Recovery
  */
 
-namespace Burcon_Plugin\Admin;
+namespace CC_Plugin\Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -27,7 +27,7 @@ if ( ! defined( 'WPINC' ) ) {
 final class Fields_Import {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -152,7 +152,7 @@ final class Fields_Import {
 			while ( $num_import > 0 );
 		}
 
-		include_once plugin_dir_path( __FILE__ ) . 'partials/fields-import-page.php';
+		include_once BURCON_PATH . 'partials/fields-import-page.php';
 
 	}
 
@@ -165,11 +165,11 @@ final class Fields_Import {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_fields_import() {
+function ccp_fields_import() {
 
 	return Fields_Import::instance();
 
 }
 
 // Run an instance of the class.
-burcon_fields_import();
+ccp_fields_import();

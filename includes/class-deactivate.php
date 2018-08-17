@@ -7,7 +7,7 @@
  * @link       http://ccdzine.com
  * @since      1.0.0
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Includes
  */
 
@@ -22,10 +22,10 @@ if ( ! defined( 'WPINC' ) ) {
  * @since  1.0.0
  * @access public
  */
-class Controlled_Chaos_Deactivate {
+class Burcon_Outfitters_Deactivate {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -40,6 +40,9 @@ class Controlled_Chaos_Deactivate {
 
 			// Set variable for new instance.
 			$instance = new self;
+
+			// Deactivation function
+			$instance->deactivate();
 
 		}
 
@@ -75,8 +78,8 @@ class Controlled_Chaos_Deactivate {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_deactivate() {
+function ccp_deactivate() {
 
-	return Controlled_Chaos_Deactivate::instance();
+	return Burcon_Outfitters_Deactivate::instance();
 
 }

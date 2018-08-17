@@ -2,14 +2,14 @@
 /**
  * Dashboard functionality.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin\Dashboard
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin\Dashboard;
+namespace CC_Plugin\Admin\Dashboard;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Dashboard {
 
     /**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -60,9 +60,6 @@ class Dashboard {
 	 */
     public function __construct() {
 
-        // New title for the Dashboard page.
-        add_filter( 'admin_title', [ $this, 'dashboard_title' ], 10, 2 );
-
         // "At a Glance" dashboard widget.
         add_action( 'dashboard_glance_items', [ $this, 'at_glance' ] );
 
@@ -76,58 +73,7 @@ class Dashboard {
         add_action( 'admin_head', [ $this, 'add_help' ] );
 
         // Enqueue dashboard stylesheet.
-		add_action( 'admin_enqueue_scripts', [ $this, 'styles' ] );
-
-    }
-
-    /**
-     * New title for the Dashboard page.
-     *
-     * @since  1.0.0
-	 * @access public
-     * @param  object $admin_title
-     * @param  object $title
-     * @param  string $current_user
-     * @param  string $user_name
-     * @param  string $dashboard_title
-     * @return string Returns the amended dashboard screen title.
-     */
-    public function dashboard_title( $admin_title, $title, $current_user = '', $user_name = '',  $dashboard_title = '' ) {
-
-        // Get the current screen and title objects.
-        global $current_screen, $title;
-
-        // Bail if not on the dashboard screen.
-        if ( 'dashboard' != $current_screen->id  ) {
-            return $admin_title;
-        }
-
-        // Get the current user to extract the name.
-        $current_user = wp_get_current_user();
-
-        // if the user has provided a first name then use it.
-        if ( ! empty( $current_user->first_name ) ) {
-            $user_name = $current_user->first_name;
-
-        // Otherwise use the display name.
-        } else {
-            $user_name = $current_user->display_name;
-        }
-
-        // Assemble the title text without HTML.
-        $dashboard_title = sprintf(
-            '%1s %2s! %3s',
-            __( 'Howdy,', 'burcon-plugin' ),
-            $user_name,
-            __( '', 'abcd-plugin' )
-        );
-
-        // Repalce the word "Dasboard" with our new title.
-        $admin_title     = str_replace( __( 'Dashboard' ) , $dashboard_title , $admin_title );
-        $title           = $dashboard_title;
-
-        // Return the new title.
-        return $admin_title;
+        add_action( 'admin_enqueue_scripts', [ $this, 'styles' ] );
 
     }
 
@@ -141,10 +87,10 @@ class Dashboard {
 	private function dependencies() {
 
         // Get the dashboard widget class.
-        require plugin_dir_path( __FILE__ ) . 'class-dashboard-widget.php';
+        require BURCON_PATH . 'admin/dashboard/class-dashboard-widget.php';
 
         // Get the welcome panel class.
-        require plugin_dir_path( __FILE__ ) . 'class-welcome.php';
+        require BURCON_PATH . 'admin/dashboard/class-welcome.php';
 
     }
 
@@ -224,18 +170,23 @@ class Dashboard {
 
         global $wp_meta_boxes;
 
-        // Hide At a Glance widget always because we have it in the welcome panel.
-        unset( $wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now'] );
-
         // If Advanced Custom Fields Pro is active.
-        if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
+        if ( class_exists( 'acf_pro' )
+
+        // Or if free ACF plus the Options Page addon are active.
+        || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
 
             // Get the multiple checkbox field.
-            $hide = get_field( 'burcon_dashboard_hide_widgets', 'option' );
+            $hide = get_field( 'ccp_dashboard_hide_widgets', 'option' );
 
             // Hide the Welcome panel.
             if ( $hide && in_array( 'welcome', $hide ) ) {
                 remove_action( 'welcome_panel', 'wp_welcome_panel' );
+            }
+
+            // Hide the try Gutenberg panel.
+            if ( $hide && in_array( 'gutenberg', $hide ) ) {
+                remove_action( 'try_gutenberg_panel', 'wp_try_gutenberg_panel' );
             }
 
             // Hide the WordPress News widget.
@@ -246,6 +197,11 @@ class Dashboard {
             // Hide Quick Draft (QuickPress) widget.
             if ( $hide && in_array( 'quick', $hide ) ) {
                 unset( $wp_meta_boxes['dashboard']['side']['core']['dashboard_quick_press'] );
+            }
+
+            // Hide At a Glance widget.
+            if ( $hide && in_array( 'at_glance', $hide ) ) {
+                unset( $wp_meta_boxes['dashboard']['normal']['core']['dashboard_right_now'] );
             }
 
             // Hide Activity widget.
@@ -261,15 +217,21 @@ class Dashboard {
              */
 
             // Get options.
-            $welcome    = get_option( 'burcon_hide_welcome' );
-            $wp_news    = get_option( 'burcon_hide_wp_news' );
-            $quickpress = get_option( 'burcon_hide_quickpress' );
-            $at_glance  = get_option( 'burcon_hide_at_glance' );
-            $activity   = get_option( 'burcon_hide_activity' );
+            $welcome    = get_option( 'ccp_hide_welcome' );
+            $gutenberg  = get_option( 'ccp_hide_try_gutenberg' );
+            $wp_news    = get_option( 'ccp_hide_wp_news' );
+            $quickpress = get_option( 'ccp_hide_quickpress' );
+            $at_glance  = get_option( 'ccp_hide_at_glance' );
+            $activity   = get_option( 'ccp_hide_activity' );
 
             // Hide the Welcome panel.
             if ( $welcome ) {
                 remove_action( 'welcome_panel', 'wp_welcome_panel' );
+            }
+
+            // Hide the try Gutenberg panel.
+            if ( $gutenberg ) {
+                remove_action( 'try_gutenberg_panel', 'wp_try_gutenberg_panel' );
             }
 
             // Hide the WordPress News widget.
@@ -376,7 +338,7 @@ class Dashboard {
      */
 	public function help_welcome_panel() {
 
-        include_once plugin_dir_path( __FILE__ ) . 'partials/help/help-welcome-panel.php';
+        include_once BURCON_PATH . 'partials/help/help-welcome-panel.php';
 
     }
 
@@ -387,7 +349,7 @@ class Dashboard {
      */
 	public function help_dashboard_widgets() {
 
-        include_once plugin_dir_path( __FILE__ ) . 'partials/help/help-dashboard-widgets.php';
+        include_once BURCON_PATH . 'partials/help/help-dashboard-widgets.php';
 
     }
 
@@ -426,8 +388,6 @@ class Dashboard {
      * @since  1.0.0
 	 * @access public
 	 * @return void
-     *
-     * @todo   Put CSS back to the CSS directory.
 	 */
 	public function styles() {
 
@@ -436,7 +396,7 @@ class Dashboard {
 
         // Enqueue only on the Dashboard screen.
         if ( $screen->id == 'dashboard' ) {
-            wp_enqueue_style( BURCON_ADMIN_SLUG . '-dashboard', plugin_dir_url( __FILE__ ) .  'assets/scss/dashboard.css', [], null, 'screen' );
+            wp_enqueue_style( BURCON_ADMIN_SLUG . '-dashboard', BURCON_URL .  'assets/css/dashboard.css', [], null, 'screen' );
         }
 
 	}
@@ -450,11 +410,11 @@ class Dashboard {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_dashboard() {
+function ccp_dashboard() {
 
 	return Dashboard::instance();
 
 }
 
 // Run an instance of the class.
-burcon_dashboard();
+ccp_dashboard();

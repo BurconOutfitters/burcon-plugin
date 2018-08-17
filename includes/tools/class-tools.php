@@ -2,7 +2,7 @@
 /**
  * Various tools included.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Includes\Tools
  *
  * @since      1.0.0
@@ -12,7 +12,7 @@
  *             hiding the Development Tools admin page.
  */
 
-namespace Burcon_Plugin\Includes\Tools;
+namespace CC_Plugin\Includes\Tools;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -31,7 +31,7 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 class Tools {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -64,7 +64,12 @@ class Tools {
 	 * @access public
 	 * @return void Constructor method is empty.
 	 */
-	public function __construct() {}
+	public function __construct() {
+
+		add_filter( 'acf/settings/save_json', [ $this, 'acf_json_save_point' ], 20 );
+		add_filter( 'acf/settings/load_json', [ $this, 'acf_json_load_point' ], 20 );
+
+	}
 
 	/**
 	 * Load the required dependencies for this plugin.
@@ -76,30 +81,56 @@ class Tools {
 	private function dependencies() {
 
 		// Minify HTML source code.
-		$debug = get_option( 'burcon_debug_mode' );
+		$debug = get_option( 'ccp_debug_mode' );
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'tools/class-debug.php';
+		require_once BURCON_PATH . 'includes/tools/class-debug.php';
 
 		// Include the RTL (right to left) test if option selected.
-		$rtl = get_option( 'burcon_rtl_test' );
+		$rtl = get_option( 'ccp_rtl_test' );
 
 		if ( $rtl ) {
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'tools/class-rtl-test.php';
+			require_once BURCON_PATH . 'includes/tools/class-rtl-test.php';
 		}
 
 		// Minify HTML source code.
-		$minify = get_option( 'burcon_html_minify' );
+		$minify = get_option( 'ccp_html_minify' );
 
 		if ( $minify ) {
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'tools/class-minify-process.php';
+			require_once BURCON_PATH . 'includes/tools/class-minify-process.php';
 		}
 
 		// Live theme test.
-		$theme_test = get_option( 'burcon_theme_test' );
+		$theme_test = get_option( 'ccp_theme_test' );
 
 		if ( $theme_test ) {
-			include_once plugin_dir_path( dirname( __FILE__ ) ) . 'tools/class-theme-test.php';
+			include_once BURCON_PATH . 'includes/tools/class-theme-test.php';
 		}
+
+	}
+
+	public function acf_json_save_point( $path ) {
+
+		// update path
+		$path = plugin_dir_path( __DIR__ ) . '/acf-json';
+
+
+		// return
+		return $path;
+
+	}
+
+	public function acf_json_load_point( $paths ) {
+
+		// remove original path (optional)
+		unset( $paths[0] );
+
+
+		// append path
+		$paths[] = plugin_dir_path( __DIR__ ) . '/acf-json';
+
+
+		// return
+		return $paths;
 
 	}
 
@@ -112,11 +143,11 @@ class Tools {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_tools() {
+function ccp_tools() {
 
 	return Tools::instance();
 
 }
 
 // Run an instance of the class.
-burcon_tools();
+ccp_tools();

@@ -7,7 +7,7 @@
  * @since IntegratePress 1.0.0
  */
 
-namespace Burcon_Plugin\Admin\Dashboard;
+namespace CC_Plugin\Admin\Dashboard;
 
 // Restrict direct access
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class Dashboard_Widget {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -71,7 +71,7 @@ class Dashboard_Widget {
 
 		register_sidebar( [
 			'name'          => __( 'Dashboard Widget Area', 'burcon-plugin' ),
-			'id'            => 'burcon_dashboard_widget',
+			'id'            => 'ccp_dashboard_widget',
 			'description'   => __( 'Widgetize the Dasboard for users.', 'burcon-plugin' ),
 			'before_widget' => '<div id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</div>',
@@ -90,9 +90,9 @@ class Dashboard_Widget {
 	 */
 	public function dashboard_widget() {
 
-		$heading = apply_filters( 'burcon_dashboard_widget_heading', __( 'Sample Widget', 'burcon-plugin' ) );
+		$heading = apply_filters( 'ccp_dashboard_widget_heading', __( 'Sample Widget', 'burcon-plugin' ) );
 
-		wp_add_dashboard_widget( 'burcon_dashboard_widget', $heading, [ $this, 'output' ] );
+		wp_add_dashboard_widget( 'ccp_dashboard_widget', $heading, [ $this, 'output' ] );
 
 	}
 
@@ -105,9 +105,9 @@ class Dashboard_Widget {
 	 */
 	public function output() {
 
-		if ( is_active_sidebar( 'burcon_dashboard_widget' ) ) {
+		if ( is_active_sidebar( 'ccp_dashboard_widget' ) ) {
 
-			dynamic_sidebar( 'burcon_dashboard_widget' );
+			dynamic_sidebar( 'ccp_dashboard_widget' );
 
 		} else {
 
@@ -133,11 +133,11 @@ class Dashboard_Widget {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_dashboard_widget() {
+function ccp_dashboard_widget() {
 
 	return Dashboard_Widget::instance();
 
 }
 
 // Run an instance of the class.
-burcon_dashboard_widget();
+ccp_dashboard_widget();

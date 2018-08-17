@@ -6,72 +6,6 @@
 
 .welcome-panel .welcome-panel-content.custom {
 
-	.welcome-panel-header {
-
-		.welcome-panel-header-wrap {
-			display: flex;
-
-			.dashboard-logo {
-				max-width: 120px;
-				margin-right: 2em;
-
-				img {
-					max-width: 100%;
-				}
-			}
-
-			.dashboard-greeting {
-				flex-grow: 1;
-			}
-
-			.dashboard-summary {
-				flex-grow: 2;
-
-				ul {
-					margin-bottom: 0;
-
-					li {
-						display: inline;
-
-						&:not(:last-of-type) {
-							margin-right: 1em;
-						}
-
-						a {
-
-							&:before {
-								font-size: 1.35em;
-								font-family: 'Dashicons';
-								margin-right: 0.3em;
-								vertical-align: middle;
-							}
-						}
-
-						&.post-count a:before {
-							content: '\f109';
-						}
-
-						&.page-count a:before {
-							content: '\f105';
-						}
-
-						&.comment-count a:before {
-							content: '\f101';
-						}
-
-						&.hidden {
-							display: none;
-						}
-					}
-				}
-
-				#wp-version-message {
-					margin: 0;
-				}
-			}
-		}
-	}
-
 	.welcome-panel-column-container {
 
 		.welcome-panel-column {
@@ -90,23 +24,5 @@
 
 	h2 {}
 
-	.about-description{
-		margin-top: 0.5em;
-	}
-
-}
-
-/*--------------------------------------------------------------
-# WORDPRESS QUERIES
---------------------------------------------------------------*/
-@media screen and ( max-width: 782px ) {
-
-	.welcome-panel-header-wrap {
-		flex-direction: column;
-	}
-
-}
-
-@media screen and ( max-width: 600px ) {
-	/* Styles */
+	.about-description{}
 }

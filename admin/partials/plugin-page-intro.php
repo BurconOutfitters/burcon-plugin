@@ -7,14 +7,14 @@
  * However, I like to do things properly and I want this to serve as
  * an example of how it should be done for your project.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin\Partials
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin\Partials;
+namespace CC_Plugin\Admin\Partials;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -28,15 +28,33 @@ if ( ! defined( 'WPINC' ) ) {
 <!-- Section heading -->
 <h3><?php _e( 'Introduction', 'burcon-plugin' ); ?></h3>
 
-<p><?php _e( 'This is a parent plugin, or a plugin framework, that provides consistent functionality accross all websites under the management of Burcon Outfitters. It was built with extensibility in mind so that each website in the network may add funcionality peculiar to its specific needs.' ); ?></p>
+<?php echo sprintf(
+	'<p>%1s <a href="%2s" target="_blank">Controlled Chaos Design</a>.</p>',
+	__( 'Howdy, folks. My name is Greg Sweet. I am sole proprietor, chief cook and bottle washer at', 'burcon-plugin' ),
+	esc_url( 'http://ccdzine.com/' )
+); ?>
+<?php echo sprintf(
+	'<p>%1s <a href="%2s" target="_blank">%3s</a>%4s</p>',
+	__( 'I built this plugin as a starter for client sites, including features that I use often, the code for which I repeatedly copied from my', 'burcon-plugin' ),
+	esc_url( 'https://gist.github.com/ControlledChaos' ),
+	__( 'gist library', 'burcon-plugin' ),
+	__( '. It is not intended to be a plug-and-play type of thing, although it can be used as such. This is more of a developer\'s tool. I have commented thouroughly on the code and documentec the files to the best of my ability. I have learned by looking at the code of others so I have kept this in mind when writing the code for this plugin.', 'burcon-plugin' )
+ ) ?>
+
+<!-- Section heading -->
+<h3><?php _e( 'Approach', 'burcon-plugin' ); ?></h3>
+
+<p><?php _e( 'Although this plugin comes with my business name incorporated into it, I am not trying to put my branding stink all over your project. It has to have a name so I used my own. However, since I need to rename the plugin for my clients\' websites, I have made every effort to use a simple, uniform naming system that can be quicky renamed for your project.', 'burcon-plugin' ); ?></p>
+<p><?php _e( 'Not every feature included with this plugin will be needed for my projects or yours. And one big reason for writing a site-specific plugin is to include only what the site needs and eliminate the overhead of plugins and themes that offer things that you don\'t need. So why have I packed so much into this plugin? Well, I find it to be much quicker and easier to remove unnecessary code that it is to write, or even copy & paste, new code into a project. And being that you will rename this plugin and that it will update to overwrite your changes, modifications can be made ad libidum.', 'burcon-plugin' ); ?></p>
 
 <!-- Section heading -->
 <h3><?php _e( 'Compatibility', 'burcon-plugin' ); ?></h3>
 
-<ul class="burcon_bullet-list">
+<ul class="ccp_bullet-list">
 	<li><?php _e( 'This plugin was written in a WordPress 4.9+ environment with no concern for backwards compatitbility.', 'burcon-plugin' ); ?></li>
 	<li><?php _e( 'This plugin was written on a local server running PHP 7.0', 'burcon-plugin' ); ?></li>
 	<li><?php _e( 'The short array syntax ( "[]" rather than "array()" ) requires PHP 5.4+', 'burcon-plugin' ); ?></li>
+	<li><?php _e( 'Run a modern setup and you\'ll be fine.', 'burcon-plugin' ); ?></li>
 </ul>
 <?php echo sprintf(
 	'<p>%1s</p>',

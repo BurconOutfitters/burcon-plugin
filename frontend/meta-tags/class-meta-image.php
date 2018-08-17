@@ -2,14 +2,14 @@
 /**
  * Image meta tag.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Frontend\Meta_Tags
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Frontend\Meta_Tags;
+namespace CC_Plugin\Frontend\Meta_Tags;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Meta_Image {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -58,7 +58,7 @@ class Meta_Image {
 	public function __construct() {
 
 		// Add the image to meta tag.
-		add_action( 'burcon_meta_image_tag', [ $this, 'image' ] );
+		add_action( 'ccp_meta_image_tag', [ $this, 'image' ] );
 
 	}
 
@@ -87,8 +87,8 @@ class Meta_Image {
 		if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
 
 			// Get the ACF image fields.
-			$blog_image    = get_field( 'burcon_meta_blog_image', 'option' );
-			$default_image = get_field( 'burcon_meta_default_image', 'option' );
+			$blog_image    = get_field( 'ccp_meta_blog_image', 'option' );
+			$default_image = get_field( 'ccp_meta_default_image', 'option' );
 
 			/**
 			 * Conditionally get images.
@@ -168,11 +168,11 @@ class Meta_Image {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_meta_image() {
+function ccp_meta_image() {
 
 	return Meta_Image::instance();
 
 }
 
 // Run an instance of the class.
-burcon_meta_image();
+ccp_meta_image();

@@ -2,14 +2,14 @@
 /**
  * New admin pages and admin screen modification.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin;
+namespace CC_Plugin\Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Admin_Pages {
 
     /**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -58,7 +58,7 @@ class Admin_Pages {
     public function __construct() {
 
         // Add an about page for the plugin.
-        // add_action( 'admin_menu', [ $this, 'about_plugin' ] );
+        add_action( 'admin_menu', [ $this, 'about_plugin' ] );
 
         // Replace default post title placeholders.
         add_filter( 'enter_title_here', [ $this, 'title_placeholders' ] );
@@ -75,6 +75,8 @@ class Admin_Pages {
         /**
          * Add featured image to admin post columns only if
          * Admin Columns free or pro plugin not activated.
+         *
+         * @link https://wordpress.org/plugins/codepress-admin-columns/
          */
         if ( ! class_exists( 'CPAC' ) || ! class_exists( 'ACP_Full' ) ) {
             add_filter( 'manage_posts_columns', [ $this, 'image_column_head' ] );
@@ -96,6 +98,8 @@ class Admin_Pages {
      * @since  1.0.0
 	 * @access public
 	 * @return void
+     *
+     * @todo   Sync up the ACF and WP menu position settings.
      */
     public function about_plugin() {
 
@@ -110,7 +114,7 @@ class Admin_Pages {
         if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
 
             // Get the field.
-            $acf_position = get_field( 'burcon_site_plugin_link_position', 'option' );
+            $acf_position = get_field( 'ccp_site_plugin_link_position', 'option' );
 
             // Return true if the field is set to `top`.
             if ( 'top' == $acf_position ) {
@@ -125,7 +129,7 @@ class Admin_Pages {
         } else {
 
             // Get the field.
-            $position = get_option( 'burcon_site_plugin_position' );
+            $position = get_option( 'ccp_site_plugin_link_position' );
         }
 
         /**
@@ -139,13 +143,13 @@ class Admin_Pages {
         if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
 
             // Get the field.
-            $link_label = get_field( 'burcon_site_plugin_link_label', 'option' );
+            $link_label = get_field( 'ccp_site_plugin_link_label', 'option' );
 
         // If ACF is not active, get the field from the WordPress options page.
         } else {
 
             // Get the field.
-            $link_label = sanitize_text_field( get_option( 'burcon_site_plugin_link_label' ) );
+            $link_label = sanitize_text_field( get_option( 'ccp_site_plugin_link_label' ) );
         }
 
         // If one of the label fields above is not empty the use that label.
@@ -170,13 +174,13 @@ class Admin_Pages {
         if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
 
             // Get the field.
-            $link_icon  = get_field( 'burcon_site_plugin_link_icon', 'option' );
+            $link_icon  = get_field( 'ccp_site_plugin_link_icon', 'option' );
 
         // If ACF is not active, get the field from the WordPress options page.
         } else {
 
             // Get the field.
-            $link_icon  = sanitize_text_field( get_option( 'burcon_site_plugin_link_icon' ) );
+            $link_icon  = sanitize_text_field( get_option( 'ccp_site_plugin_link_icon' ) );
         }
 
         // If one of the icon fields above is not empty the use that CSS class.
@@ -223,7 +227,7 @@ class Admin_Pages {
      */
     public function about_plugin_output() {
 
-        require plugin_dir_path( __FILE__ ) . 'partials/plugin-page-about.php';
+        require BURCON_PATH . 'admin/partials/plugin-page-about.php';
 
     }
 
@@ -270,7 +274,7 @@ class Admin_Pages {
      */
 	public function help_plugin_info() {
 
-		include_once plugin_dir_path( __FILE__ ) . 'partials/help/help-plugin-info.php';
+		include_once BURCON_PATH . 'admin/partials/help/help-plugin-info.php';
 
     }
 
@@ -281,7 +285,7 @@ class Admin_Pages {
      */
 	public function help_convert_plugin() {
 
-		include_once plugin_dir_path( __FILE__ ) . 'partials/help/help-plugin-convert.php';
+		include_once BURCON_PATH . 'admin/partials/help/help-plugin-convert.php';
 
     }
 
@@ -350,7 +354,7 @@ class Admin_Pages {
         }
 
         // Apply a filter conditional modification.
-        $title = apply_filters( 'burcon_post_title_placeholders', $post_title );
+        $title = apply_filters( 'ccp_post_title_placeholders', $post_title );
 
         // Return the new placeholder.
         return $title;
@@ -458,7 +462,7 @@ class Admin_Pages {
         $size  = 'Column Thumbnail';
 
         // Apply a filter for conditional modification.
-        $thumb = apply_filters( 'burcon_column_thumbnail_size', $size );
+        $thumb = apply_filters( 'ccp_column_thumbnail_size', $size );
 
         // If there is an ID (if the post has a featured image).
         if ( $post_thumbnail_id ) {
@@ -487,7 +491,7 @@ class Admin_Pages {
         $name    = __( 'Featured Image', 'burcon-plugin' );
 
         // Apply a filter for conditional modification.
-        $heading = apply_filters( 'burcon_image_column_head', $name );
+        $heading = apply_filters( 'ccp_image_column_head', $name );
 
         // The column heading name to new `featured_image` column.
         $defaults['featured_image'] = esc_html__( $heading );
@@ -544,11 +548,11 @@ class Admin_Pages {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_admin_pages() {
+function ccp_admin_pages() {
 
 	return Admin_Pages::instance();
 
 }
 
 // Run an instance of the class.
-burcon_admin_pages();
+ccp_admin_pages();

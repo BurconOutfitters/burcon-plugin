@@ -2,14 +2,14 @@
 /**
  * Title meta tag.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Frontend\Meta_Tags
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Frontend\Meta_Tags;
+namespace CC_Plugin\Frontend\Meta_Tags;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Meta_Title {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -58,7 +58,7 @@ class Meta_Title {
 	public function __construct() {
 
 		// Add the title to meta tag.
-		add_action( 'burcon_meta_title_tag', [ $this, 'title' ] );
+		add_action( 'ccp_meta_title_tag', [ $this, 'title' ] );
 
 	}
 
@@ -86,7 +86,7 @@ class Meta_Title {
 		);
 
 		// Apply a filter to author archive title.
-		$author_meta = apply_filters( 'burcon_author_meta_title', $author_title );
+		$author_meta = apply_filters( 'ccp_author_meta_title', $author_title );
 
 		// Custom search title.
 		$search_title = sprintf(
@@ -96,7 +96,7 @@ class Meta_Title {
 		);
 
 		// Apply a filter to search title.
-		$search_meta = apply_filters( 'burcon_search_meta_title', $search_title );
+		$search_meta = apply_filters( 'ccp_search_meta_title', $search_title );
 
 		// Use the website name on the front page and 404 error page.
 		if ( is_front_page() || is_404() ) {
@@ -137,11 +137,11 @@ class Meta_Title {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_meta_title() {
+function ccp_meta_title() {
 
 	return Meta_Title::instance();
 
 }
 
 // Run an instance of the class.
-burcon_meta_title();
+ccp_meta_title();

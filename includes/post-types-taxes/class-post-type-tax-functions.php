@@ -2,14 +2,14 @@
 /**
  * Functions for post types and taxonomies.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Includes\Post_Types_Taxes
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Includes\Post_Types_Taxes;
+namespace CC_Plugin\Includes\Post_Types_Taxes;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Post_Type_Tax_Functions {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -187,11 +187,11 @@ class Post_Type_Tax_Functions {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_type_taxe_functions() {
+function ccp_type_taxe_functions() {
 
 	return Post_Type_Tax_Functions::instance();
 
 }
 
 // Run an instance of the class.
-burcon_type_taxe_functions();
+ccp_type_taxe_functions();

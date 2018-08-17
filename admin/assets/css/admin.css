@@ -152,7 +152,7 @@
  * Some of the unordered lists in the admin pages
  * look better with bullets.
  */
-.burcon_bullet-list {
+.ccp_bullet-list {
   list-style: disc;
   margin-left: 1em;
 }

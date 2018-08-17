@@ -2,14 +2,17 @@
 /**
  * About page site settings output.
  *
- * @package    Burcon_Plugin
+ * Uses the universal slug partial for admin pages. Set this
+ * slug in the core plugin file.
+ *
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin\Partials
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin\Partials;
+namespace CC_Plugin\Admin\Partials;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {

@@ -2,14 +2,14 @@
 /**
  * Filter post types by page template.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin;
+namespace CC_Plugin\Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -27,7 +27,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Filter_By_Template {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -234,11 +234,11 @@ class Filter_By_Template {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_filter_by_template() {
+function ccp_filter_by_template() {
 
 	return Filter_By_Template::instance();
 
 }
 
 // Run an instance of the class.
-burcon_filter_by_template();
+ccp_filter_by_template();

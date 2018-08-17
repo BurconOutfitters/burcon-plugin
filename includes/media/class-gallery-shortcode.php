@@ -4,7 +4,7 @@
  *
  * Rewrites the WordPress gallery shortcode with data attributes for Fancybox 3.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Includes\Media
  *
  * @since      1.0.0
@@ -14,7 +14,7 @@
  *             editor adds the option to link to the full size image.
  */
 
-namespace Burcon_Plugin\Includes\Media;
+namespace CC_Plugin\Includes\Media;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -30,7 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Gallery_Shortcode {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -441,11 +441,11 @@ class Gallery_Shortcode {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_gallery_shortcode() {
+function ccp_gallery_shortcode() {
 
 	return Gallery_Shortcode::instance();
 
 }
 
 // Run an instance of the class.
-burcon_gallery_shortcode();
+ccp_gallery_shortcode();

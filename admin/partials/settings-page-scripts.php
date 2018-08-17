@@ -2,14 +2,14 @@
 /**
  * Script options page output.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin\Partials
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin\Partials;
+namespace CC_Plugin\Admin\Partials;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -56,7 +56,7 @@ $tabs = [
 ];
 
 // Apply a filter to the tabs array for adding tabs.
-$page_tabs = apply_filters( 'burcon_tabs_script_options', $tabs );
+$page_tabs = apply_filters( 'ccp_tabs_script_options', $tabs );
 
 /**
  * Do settings section and fields by tab.
@@ -65,19 +65,19 @@ $page_tabs = apply_filters( 'burcon_tabs_script_options', $tabs );
  * @return void
  */
 if ( 'general' == $active_tab ) {
-    $section = 'burcon-scripts-general';
-    $fields  = 'burcon-scripts-general';
+    $section = 'ccp-scripts-general';
+    $fields  = 'ccp-scripts-general';
 } elseif ( 'vendor' == $active_tab ) {
-    $section = 'burcon-scripts-vendor';
-    $fields  = 'burcon-scripts-vendor';
+    $section = 'ccp-scripts-vendor';
+    $fields  = 'ccp-scripts-vendor';
 } else {
     $section = null;
     $fields  = null;
 }
 
 // Apply filters to the sections and fields for new tabs.
-$do_section = apply_filters( 'burcon_section_script_options', $section );
-$do_fields  = apply_filters( 'burcon_fields_script_options', $fields );
+$do_section = apply_filters( 'ccp_section_script_options', $section );
+$do_fields  = apply_filters( 'ccp_fields_script_options', $fields );
 
 
 /**
@@ -95,15 +95,15 @@ if ( 'general' == $active_tab  ) {
 }
 
 // Apply a filter for new tabs added by another plugin or from a theme.
-$button = apply_filters( 'burcon_save_script_options', $save );
+$button = apply_filters( 'ccp_save_script_options', $save );
 
 ?>
 <div class="wrap">
     <h1 class="wp-heading-inline"><?php esc_html_e( 'Script Options', 'burcon-plugin' ); ?></h1>
     <?php if ( is_rtl() ) : ?>
-    <p class="description"><?php esc_html_e( 'Script settings from the Controlled Chaos plugin. More information in the Help tab at upper left.', 'burcon-plugin' ); ?></p>
+    <p class="description"><?php esc_html_e( 'Script settings from the Burcon Outfitters plugin. More information in the Help tab at upper left.', 'burcon-plugin' ); ?></p>
     <?php else : ?>
-    <p class="description"><?php esc_html_e( 'Script settings from the Controlled Chaos plugin. More information in the Help tab at upper right.', 'burcon-plugin' ); ?></p>
+    <p class="description"><?php esc_html_e( 'Script settings from the Burcon Outfitters plugin. More information in the Help tab at upper right.', 'burcon-plugin' ); ?></p>
     <?php endif; ?>
     <hr class="wp-header-end">
     <h2 class="nav-tab-wrapper">

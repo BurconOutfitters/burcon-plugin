@@ -2,14 +2,14 @@
 /**
  * Admin menu functions.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin;
+namespace CC_Plugin\Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Admin_Menu {
 
     /**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -63,7 +63,7 @@ class Admin_Menu {
         // Hide ACF field groups UI.
         if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
 
-            $options = get_field( 'burcon_admin_hide_links', 'option' );
+            $options = get_field( 'ccp_admin_hide_links', 'option' );
             if ( $options && in_array( 'fields', $options ) ) {
                 add_filter( 'acf/settings/show_admin', '__return_false' );
             }
@@ -76,9 +76,9 @@ class Admin_Menu {
 
         // Get links option.
         if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
-            $links = get_field( 'burcon_links_manager', 'option' );
+            $links = get_field( 'ccp_links_manager', 'option' );
         } else {
-            $links = get_option( 'burcon_hide_links' );
+            $links = get_option( 'ccp_hide_links' );
         }
 
         // Return links filter.
@@ -119,7 +119,7 @@ class Admin_Menu {
         if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
 
             // Get the multiple checkbox field.
-            $options = get_field( 'burcon_admin_hide_links', 'option' );
+            $options = get_field( 'ccp_admin_hide_links', 'option' );
 
             // Hide Appearance link.
             if ( $options && in_array( 'themes', $options ) ) {
@@ -148,10 +148,10 @@ class Admin_Menu {
              */
 
             // Get options.
-            $appearance = get_option( 'burcon_hide_appearance' );
-            $plugins    = get_option( 'burcon_hide_plugins' );
-            $users      = get_option( 'burcon_hide_users' );
-            $tools      = get_option( 'burcon_hide_tools' );
+            $appearance = get_option( 'ccp_hide_appearance' );
+            $plugins    = get_option( 'ccp_hide_plugins' );
+            $users      = get_option( 'ccp_hide_users' );
+            $tools      = get_option( 'ccp_hide_tools' );
 
             // Hide Appearance link.
             if ( $appearance ) {
@@ -198,8 +198,8 @@ class Admin_Menu {
         if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
 
             // Get the ACF field registered by this plugin.
-            $menus_link   = get_field( 'burcon_menus_position', 'option' );
-            $widgets_link = get_field( 'burcon_widgets_position', 'option' );
+            $menus_link   = get_field( 'ccp_menus_position', 'option' );
+            $widgets_link = get_field( 'ccp_widgets_position', 'option' );
 
             // Remove Menus and Widgets as submenu items of Appearances.
             if ( isset( $submenu['themes.php'] ) ) {
@@ -259,8 +259,8 @@ class Admin_Menu {
         } else {
 
             // Get the options from the standard fields.
-            $menus_link   = get_option( 'burcon_menus_position' );
-            $widgets_link = get_option( 'burcon_widgets_position' );
+            $menus_link   = get_option( 'ccp_menus_position' );
+            $widgets_link = get_option( 'ccp_widgets_position' );
 
             // Remove Menus and Widgets as submenu items of Appearances.
             if ( isset( $submenu['themes.php'] ) ) {
@@ -341,8 +341,8 @@ class Admin_Menu {
         if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
 
             // Get the ACF field registered by this plugin.
-            $menus_link   = get_field( 'burcon_menus_position', 'option' );
-            $widgets_link = get_field( 'burcon_widgets_position', 'option' );
+            $menus_link   = get_field( 'ccp_menus_position', 'option' );
+            $widgets_link = get_field( 'ccp_widgets_position', 'option' );
 
             // Set Menus parent as self.
             if ( $current_screen->base == 'nav-menus' && 'default' != $menus_link ) {
@@ -361,8 +361,8 @@ class Admin_Menu {
         } else {
 
             // Get the options from the standard fields.
-            $menus_link   = get_option( 'burcon_menus_position' );
-            $widgets_link = get_option( 'burcon_widgets_position' );
+            $menus_link   = get_option( 'ccp_menus_position' );
+            $widgets_link = get_option( 'ccp_widgets_position' );
 
             // Set Menus parent as self.
             if ( $current_screen->base == 'nav-menus' && $menus_link ) {
@@ -421,11 +421,11 @@ class Admin_Menu {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_admin_menu() {
+function ccp_admin_menu() {
 
 	return Admin_Menu::instance();
 
 }
 
 // Run an instance of the class.
-burcon_admin_menu();
+ccp_admin_menu();

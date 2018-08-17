@@ -2,7 +2,7 @@
 /**
  * Minify HTML source code.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Includes
  *
  * @since      1.0.0
@@ -11,7 +11,7 @@
  * @todo       Work out the errors thrown when the file is namespaced
  */
 
-// namespace Burcon_Plugin\Includes\Minify;
+// namespace CC_Plugin\Includes\Minify;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -24,7 +24,7 @@ if ( ! defined( 'WPINC' ) ) {
  * @since  1.0.0
  * @access public
  */
-class Controlled_Chaos_Minify {
+class Burcon_Outfitters_Minify {
 
 	/**
 	 * HTML output variable.
@@ -216,7 +216,7 @@ class Controlled_Chaos_Minify {
  */
 function wp_html_compression_finish( $html ) {
 
-	return new Controlled_Chaos_Minify( $html );
+	return new Burcon_Outfitters_Minify( $html );
 
 }
 

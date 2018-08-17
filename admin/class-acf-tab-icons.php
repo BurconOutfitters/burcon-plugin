@@ -4,7 +4,7 @@
  *
  * Add icons to the titles of ACF tab and accordion fields.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0
@@ -15,7 +15,7 @@
  * @todo       Modify the icon font.
  */
 
-namespace Burcon_Plugin\Admin;
+namespace CC_Plugin\Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -32,7 +32,7 @@ if ( ! defined( 'WPINC' ) ) {
 final class ACF_Tab_Icons {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -100,7 +100,7 @@ final class ACF_Tab_Icons {
 
 		// Register tab icons CSS from plugin folder.
 		} else {
-			wp_register_style( 'acf-tab-icons', plugin_dir_url( __FILE__ ) . 'assets/fonts/icons/afc-icons.css', [], BURCON_VERSION );
+			wp_register_style( 'acf-tab-icons', BURCON_URL . 'assets/fonts/icons/afc-icons.css', [], BURCON_VERSION );
 		}
 
 		// Enqueue styles & scripts.
@@ -121,7 +121,7 @@ final class ACF_Tab_Icons {
 		if ( file_exists( get_theme_file_path() . '/acf-title-icons/selection.json' ) ) {
 			$json_file = file_get_contents( get_theme_file_uri( '/acf-title-icons/selection.json' ) );
 		} else {
-			$json_file = file_get_contents( plugin_dir_url( __FILE__ ) . 'assets/fonts/icons/selection.json' );
+			$json_file = file_get_contents( BURCON_URL . 'assets/fonts/icons/selection.json' );
 		}
 
 		$json_content = json_decode( $json_file, true );
@@ -211,11 +211,11 @@ final class ACF_Tab_Icons {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_acf_icons() {
+function ccp_acf_icons() {
 
 	return ACF_Tab_Icons::instance();
 
 }
 
 // Run an instance of the class.
-burcon_acf_icons();
+ccp_acf_icons();

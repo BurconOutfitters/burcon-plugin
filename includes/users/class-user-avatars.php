@@ -4,7 +4,7 @@
  *
  * Also provides front-end avatar management via a shortcode and bbPress support.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Includes\Users
  *
  * @since      1.0.0
@@ -14,7 +14,7 @@
  * @link       http://wordpress.org/extend/basic-user-avatars
  */
 
-namespace Burcon_Plugin\Includes\Users;
+namespace CC_Plugin\Includes\Users;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -39,7 +39,7 @@ class User_Avatars {
 	private $user_id_being_edited;
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -63,7 +63,7 @@ class User_Avatars {
 	}
 
 	/**
-	 * Initialize all the things.
+	 * Constructor method.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -97,9 +97,20 @@ class User_Avatars {
 	 */
 	public function admin_init() {
 
-		// Register/add the Discussion setting to restrict avatar upload capabilites
-		register_setting( 'discussion', 'burcon_user_avatars_caps', [ $this, 'sanitize_options' ] );
-		add_settings_field( 'basic-user-avatars-caps', __( 'Local Avatar Permissions', 'burcon-plugin' ), [ $this, 'avatar_settings_field' ], 'discussion', 'avatars' );
+		// Discussion setting to restrict avatar upload capabilites.
+		add_settings_field(
+			'basic-user-avatars-caps',
+			__( 'Local Avatar Permissions',	'burcon-plugin' ),
+			[ $this, 'avatar_settings_field' ],
+			'discussion',
+			'avatars',
+			[ esc_html__( 'Only allow users with file upload capabilities to upload local avatars (Authors and above).', 'burcon-plugin' ) ]
+		);
+
+		register_setting(
+			'discussion',
+			'ccp_user_avatars_caps'
+		);
 
 	}
 
@@ -110,30 +121,15 @@ class User_Avatars {
 	 * @access public
 	 * @return mixed
 	 */
-	public function avatar_settings_field() {
+	public function avatar_settings_field( $args ) {
 
-		$options = get_option( 'burcon_user_avatars_caps' ); ?>
-		<label for="burcon_user_avatars_caps">
-			<input type="checkbox" name="burcon_user_avatars_caps" id="burcon_user_avatars_caps" value="1" <?php checked( $options['burcon_user_avatars_caps'], 1 ); ?>/>
-			<?php _e( 'Only allow users with file upload capabilities to upload local avatars (Authors and above)', 'burcon-plugin' ); ?>
-		</label>
-		<?php
+		$option = get_option( 'ccp_user_avatars_caps' );
 
-	}
+		$html = '<p><input type="checkbox" id="ccp_user_avatars_caps" name="ccp_user_avatars_caps" value="1" ' . checked( 1, $option, false ) . '/>';
 
-	/**
-	 * Sanitize the Discussion settings option.
-	 *
-	 * @since  1.0.0
-	 * @access public
-	 * @param  array $input
-	 * @return array
-	 */
-	public function sanitize_options( $input ) {
+		$html .= '<label for="ccp_user_avatars_caps"> ' . $args[0] . '</label></p>';
 
-		$new_input['burcon_user_avatars_caps'] = empty( $input['burcon_user_avatars_caps'] ) ? 0 : 1;
-
-		return $new_input;
+		echo $html;
 
 	}
 
@@ -162,7 +158,7 @@ class User_Avatars {
 		if ( empty( $user_id ) )
 			return $avatar;
 
-		$local_avatars = get_user_meta( $user_id, 'burcon_user_avatar', true );
+		$local_avatars = get_user_meta( $user_id, 'ccp_user_avatar', true );
 
 		if ( empty( $local_avatars ) || empty( $local_avatars['full'] ) )
 			return $avatar;
@@ -188,7 +184,7 @@ class User_Avatars {
 			$local_avatars[$size] = is_wp_error( $image_sized ) ? $local_avatars[$size] = $local_avatars['full'] : str_replace( $upload_path['basedir'], $upload_path['baseurl'], $image_sized['path'] );
 
 			// Save updated avatar sizes
-			update_user_meta( $user_id, 'burcon_user_avatar', $local_avatars );
+			update_user_meta( $user_id, 'ccp_user_avatar', $local_avatars );
 
 		} elseif ( substr( $local_avatars[$size], 0, 4 ) != 'http' ) {
 			$local_avatars[$size] = home_url( $local_avatars[$size] );
@@ -197,7 +193,7 @@ class User_Avatars {
 		$author_class = is_author( $user_id ) ? ' current-author' : '' ;
 		$avatar       = "<img alt='" . esc_attr( $alt ) . "' src='" . $local_avatars[$size] . "' class='avatar avatar-{$size}{$author_class} photo' height='{$size}' width='{$size}' />";
 
-		return apply_filters( 'burcon_user_avatar', $avatar );
+		return apply_filters( 'ccp_user_avatar', $avatar );
 
 	}
 
@@ -226,15 +222,15 @@ class User_Avatars {
 				</td>
 				<td>
 				<?php
-				$options = get_option( 'burcon_user_avatars_caps' );
-				if ( empty( $options['burcon_user_avatars_caps'] ) || current_user_can( 'upload_files' ) ) {
+				$options = get_option( 'ccp_user_avatars_caps' );
+				if ( empty( $options['ccp_user_avatars_caps'] ) || current_user_can( 'upload_files' ) ) {
 					// Nonce security ftw.
-					wp_nonce_field( 'burcon_user_avatar_nonce', '_burcon_user_avatar_nonce', false );
+					wp_nonce_field( 'ccp_user_avatar_nonce', '_ccp_user_avatar_nonce', false );
 
 					// File upload input.
 					echo '<input type="file" name="basic-user-avatar" id="basic-local-avatar" /><br />';
 
-					if ( empty( $profileuser->burcon_user_avatar ) ) {
+					if ( empty( $profileuser->ccp_user_avatar ) ) {
 						echo '<span class="description">' . __( 'No local avatar is set. Use the upload field to add a local avatar.', 'burcon-plugin' ) . '</span>';
 					} else {
 						echo '<input type="checkbox" name="basic-user-avatar-erase" value="1" /> ' . __( 'Delete local avatar', 'burcon-plugin' ) . '<br />';
@@ -242,7 +238,7 @@ class User_Avatars {
 					}
 
 				} else {
-					if ( empty( $profileuser->burcon_user_avatar ) ) {
+					if ( empty( $profileuser->ccp_user_avatar ) ) {
 						echo '<span class="description">' . __( 'No local avatar is set. Set up your avatar at Gravatar.com.', 'burcon-plugin' ) . '</span>';
 					} else {
 						echo '<span class="description">' . __( 'You do not have media management permissions. To change your local avatar, contact the site administrator.', 'burcon-plugin' ) . '</span>';
@@ -268,7 +264,7 @@ class User_Avatars {
 	public function edit_user_profile_update( $user_id ) {
 
 		// Check for nonce otherwise bail.
-		if ( ! isset( $_POST['_burcon_user_avatar_nonce'] ) || ! wp_verify_nonce( $_POST['_burcon_user_avatar_nonce'], 'burcon_user_avatar_nonce' ) )
+		if ( ! isset( $_POST['_ccp_user_avatar_nonce'] ) || ! wp_verify_nonce( $_POST['_ccp_user_avatar_nonce'], 'ccp_user_avatar_nonce' ) )
 			return;
 
 		if ( ! empty( $_FILES['basic-user-avatar']['name'] ) ) {
@@ -308,7 +304,7 @@ class User_Avatars {
 			}
 
 			// Save user information (overwriting previous).
-			update_user_meta( $user_id, 'burcon_user_avatar', [ 'full' => $avatar['url'] ] );
+			update_user_meta( $user_id, 'ccp_user_avatar', [ 'full' => $avatar['url'] ] );
 
 		} elseif ( ! empty( $_POST['basic-user-avatar-erase'] ) ) {
 			// Nuke the current avatar
@@ -343,15 +339,15 @@ class User_Avatars {
 			<?php
 			echo get_avatar( $profileuser->ID );
 
-			$options = get_option( 'burcon_user_avatars_caps' );
-			if ( empty( $options['burcon_user_avatars_caps'] ) || current_user_can( 'upload_files' ) ) {
+			$options = get_option( 'ccp_user_avatars_caps' );
+			if ( empty( $options['ccp_user_avatars_caps'] ) || current_user_can( 'upload_files' ) ) {
 				// Nonce security ftw.
-				wp_nonce_field( 'burcon_user_avatar_nonce', '_burcon_user_avatar_nonce', false );
+				wp_nonce_field( 'ccp_user_avatar_nonce', '_ccp_user_avatar_nonce', false );
 
 				// File upload input.
 				echo '<p><input type="file" name="basic-user-avatar" id="basic-local-avatar" /></p>';
 
-				if ( empty( $profileuser->burcon_user_avatar ) ) {
+				if ( empty( $profileuser->ccp_user_avatar ) ) {
 					echo '<p class="description">' . __( 'No local avatar is set. Use the upload field to add a local avatar.', 'burcon-plugin' ) . '</p>';
 				} else {
 					echo '<input type="checkbox" name="basic-user-avatar-erase" value="1" /> ' . __( 'Delete local avatar', 'burcon-plugin' ) . '<br />';
@@ -359,7 +355,7 @@ class User_Avatars {
 				}
 
 			} else {
-				if ( empty( $profileuser->burcon_user_avatar ) ) {
+				if ( empty( $profileuser->ccp_user_avatar ) ) {
 					echo '<p class="description">' . __( 'No local avatar is set. Set up your avatar at Gravatar.com.', 'burcon-plugin' ) . '</p>';
 				} else {
 					echo '<p class="description">' . __( 'You do not have media management permissions. To change your local avatar, contact the site administrator.', 'burcon-plugin' ) . '</p>';
@@ -394,15 +390,15 @@ class User_Avatars {
  			echo '<fieldset class="bbp-form avatar">';
 
 	 			echo get_avatar( $profileuser->ID );
-				$options = get_option( 'burcon_user_avatars_caps' );
-				if ( empty( $options['burcon_user_avatars_caps'] ) || current_user_can( 'upload_files' ) ) {
+				$options = get_option( 'ccp_user_avatars_caps' );
+				if ( empty( $options['ccp_user_avatars_caps'] ) || current_user_can( 'upload_files' ) ) {
 					// Nonce security ftw.
-					wp_nonce_field( 'burcon_user_avatar_nonce', '_burcon_user_avatar_nonce', false );
+					wp_nonce_field( 'ccp_user_avatar_nonce', '_ccp_user_avatar_nonce', false );
 
 					// File upload input.
 					echo '<br /><input type="file" name="basic-user-avatar" id="basic-local-avatar" /><br />';
 
-					if ( empty( $profileuser->burcon_user_avatar ) ) {
+					if ( empty( $profileuser->ccp_user_avatar ) ) {
 						echo '<span class="description" style="margin-left:0;">' . __( 'No local avatar is set. Use the upload field to add a local avatar.', 'burcon-plugin' ) . '</span>';
 					} else {
 						echo '<input type="checkbox" name="basic-user-avatar-erase" value="1" style="width:auto" /> ' . __( 'Delete local avatar', 'burcon-plugin' ) . '<br />';
@@ -410,7 +406,7 @@ class User_Avatars {
 					}
 
 				} else {
-					if ( empty( $profileuser->burcon_user_avatar ) ) {
+					if ( empty( $profileuser->ccp_user_avatar ) ) {
 						echo '<span class="description" style="margin-left:0;">' . __( 'No local avatar is set. Set up your avatar at Gravatar.com.', 'burcon-plugin' ) . '</span>';
 					} else {
 						echo '<span class="description" style="margin-left:0;">' . __( 'You do not have media management permissions. To change your local avatar, contact the site administrator.', 'burcon-plugin' ) . '</span>';
@@ -434,11 +430,22 @@ class User_Avatars {
 	 * @param  array $avatar_defaults
 	 * @return array
 	 */
-	public function avatar_defaults( $avatar_defaults ) {
+	public function avatar_defaults( $avatar_defaults = [] ) {
 
-		remove_action( 'get_avatar', [ $this, 'get_avatar' ] );
+		// remove_action( 'get_avatar', [ $this, 'get_avatar' ] );
 
-		return $avatar_defaults;
+		$new_avatar_defaults = $avatar_defaults;
+
+		// Maybe block Gravatars
+		if ( get_option( 'ccp_block_gravatar' ) ) {
+			$new_avatar_defaults = [
+				'mystery' => __( 'Mystery Person', 'burcon-plugin' ),
+				'blank'   => __( 'Blank', 'burcon-plugin' )
+			];
+		}
+
+		// Return avatar types, maybe without Gravatar options
+		return $new_avatar_defaults;
 
 	}
 
@@ -451,7 +458,7 @@ class User_Avatars {
 	 */
 	public function avatar_delete( $user_id ) {
 
-		$old_avatars = get_user_meta( $user_id, 'burcon_user_avatar', true );
+		$old_avatars = get_user_meta( $user_id, 'ccp_user_avatar', true );
 		$upload_path = wp_upload_dir();
 
 		if ( is_array( $old_avatars ) ) {
@@ -461,7 +468,7 @@ class User_Avatars {
 			}
 		}
 
-		delete_user_meta( $user_id, 'burcon_user_avatar' );
+		delete_user_meta( $user_id, 'ccp_user_avatar' );
 
 	}
 
@@ -499,11 +506,11 @@ class User_Avatars {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_avatars() {
+function ccp_avatars() {
 
 	return User_Avatars::instance();
 
 }
 
 // Run an instance of the class.
-burcon_avatars();
+ccp_avatars();

@@ -2,14 +2,14 @@
 /**
  * The core settings class for the plugin.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin;
+namespace CC_Plugin\Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Settings {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -76,13 +76,13 @@ class Settings {
 		 */
 
 		// Settings fields for script loading and more.
-		require_once plugin_dir_path( __FILE__ ) . 'class-settings-page-scripts.php';
+		require_once BURCON_PATH . 'admin/class-settings-page-scripts.php';
 
 		// Settings fields for site customization.
-		require_once plugin_dir_path( __FILE__ ) . 'class-settings-page-site.php';
+		require_once BURCON_PATH . 'admin/class-settings-page-site.php';
 
 		// Fields for the Media Settings page.
-		require_once plugin_dir_path( __FILE__ ) . 'class-settings-page-dev-tools.php';
+		require_once BURCON_PATH . 'admin/class-settings-page-dev-tools.php';
 
 		/**
 		 * Settings fields.
@@ -91,16 +91,16 @@ class Settings {
 		 */
 
 		// Settings fields for script loading and more.
-		require_once plugin_dir_path( __FILE__ ) . 'class-settings-fields-scripts.php';
+		require_once BURCON_PATH . 'admin/class-settings-fields-scripts.php';
 
 		// Settings fields for site customization.
-		require_once plugin_dir_path( __FILE__ ) . 'class-settings-fields-site.php';
+		require_once BURCON_PATH . 'admin/class-settings-fields-site.php';
 
 		// Settings fields for the media settings page.
-		require_once plugin_dir_path( __FILE__ ) . 'class-settings-fields-media.php';
+		require_once BURCON_PATH . 'admin/class-settings-fields-media.php';
 
 		// Settings fields for development tools page.
-		require_once plugin_dir_path( __FILE__ ) . 'class-settings-fields-dev-tools.php';
+		require_once BURCON_PATH . 'admin/class-settings-fields-dev-tools.php';
 
 	}
 
@@ -113,11 +113,11 @@ class Settings {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_settings() {
+function ccp_settings() {
 
 	return Settings::instance();
 
 }
 
 // Run an instance of the class.
-burcon_settings();
+ccp_settings();

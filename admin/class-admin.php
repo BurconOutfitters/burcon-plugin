@@ -2,14 +2,14 @@
 /**
  * Admin functiontionality and settings.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin;
+namespace CC_Plugin\Admin;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -30,7 +30,7 @@ if ( ! is_admin() ) {
 class Admin {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -60,10 +60,10 @@ class Admin {
 	 * Constructor method.
 	 *
 	 * @since  1.0.0
-	 * @access public
+	 * @access private
 	 * @return self
 	 */
-	public function __construct() {
+	private function __construct() {
 
 		// Remove theme & plugin editor links.
 		add_action( 'admin_init', [ $this, 'remove_editor_links' ] );
@@ -115,37 +115,37 @@ class Admin {
 	private function dependencies() {
 
 		// The core settings class for the plugin.
-		require_once plugin_dir_path( __FILE__ ) . 'class-settings.php';
+		require_once BURCON_PATH . 'admin/class-settings.php';
 
 		// Add icons to the titles of ACF tab and accordion fields, if active.
-		if ( class_exists( 'acf_pro' ) && ! get_option( 'burcon_acf_activate_settings_page' ) ) {
-			include_once plugin_dir_path( __FILE__ ) . 'class-acf-tab-icons.php';
+		if ( class_exists( 'acf_pro' ) && ! get_option( 'ccp_acf_activate_settings_page' ) ) {
+			include_once BURCON_PATH . 'admin/class-acf-tab-icons.php';
 		}
 
 		// Include custom fields for Advanced Custom Fields Pro, if active.
-		if ( class_exists( 'acf_pro' ) && ! get_option( 'burcon_acf_activate_settings_page' ) ) {
-			include_once plugin_dir_path( __FILE__ ) . 'class-settings-fields-site-acf.php';
+		if ( class_exists( 'acf_pro' ) && ! get_option( 'ccp_acf_activate_settings_page' ) ) {
+			include_once BURCON_PATH . 'admin/class-settings-fields-site-acf.php';
 		}
 
 		// Functions for dasboard widgets, excluding the welcome panel.
-		require_once plugin_dir_path( __FILE__ ) . 'dashboard/class-dashboard.php';
+		require_once BURCON_PATH . 'admin/dashboard/class-dashboard.php';
 
 		// Functions for admin menu item positions and visibility.
-		require_once plugin_dir_path( __FILE__ ) . 'class-admin-menu.php';
+		require_once BURCON_PATH . 'admin/class-admin-menu.php';
 
 		// Add menus to the admin toolbar.
-		require_once plugin_dir_path( __FILE__ ) . 'class-admin-toolbar-menus.php';
+		require_once BURCON_PATH . 'admin/class-admin-toolbar-menus.php';
 
 		// Functions for various admin pages and edit screens.
-		require_once plugin_dir_path( __FILE__ ) . 'class-admin-pages.php';
+		require_once BURCON_PATH . 'admin/class-admin-pages.php';
 
 		// Import custom fields for editing, if ACF Pro is active.
 		if ( class_exists( 'acf_pro' ) || ( class_exists( 'acf' ) && class_exists( 'acf_options_page' ) ) ) {
-			include_once plugin_dir_path( __FILE__ ) . 'class-fields-import.php';
+			include_once BURCON_PATH . 'admin/class-fields-import.php';
 		}
 
 		// Filter by page template.
-		require_once plugin_dir_path( __FILE__ ) . 'class-admin-template-filter.php';
+		require_once BURCON_PATH . 'admin/class-admin-template-filter.php';
 
 	}
 
@@ -180,7 +180,7 @@ class Admin {
 		global $pagenow;
 
 		// Redirect if user is on the theme or plugin editor page.
-		if ( $pagenow == ( 'plugin-editor.php' ) || $pagenow == 'theme-editor.php' ) {
+		if ( $pagenow == 'plugin-editor.php' || $pagenow == 'theme-editor.php' ) {
 			wp_redirect( admin_url( '/', 'http' ), 302 );
 			exit;
 		}
@@ -275,8 +275,8 @@ class Admin {
 			 * Get the fields registered by this plugin. An additional parameter
 			 * of 'option' must be included to target the options page.
 			 */
-			$credit = get_field( 'burcon_admin_footer_credit', 'option' );
-			$link   = get_field( 'burcon_admin_footer_link', 'option' );
+			$credit = get_field( 'ccp_admin_footer_credit', 'option' );
+			$link   = get_field( 'ccp_admin_footer_link', 'option' );
 
 			// If a name and a URL are provided.
 			if ( $credit && $link ) {
@@ -312,8 +312,8 @@ class Admin {
 		 */
 		} else {
 
-			$credit = sanitize_text_field( get_option( 'burcon_footer_credit' ) );
-			$link   = esc_url_raw( get_option( 'burcon_footer_link' ) );
+			$credit = sanitize_text_field( get_option( 'ccp_footer_credit' ) );
+			$link   = esc_url_raw( get_option( 'ccp_footer_link' ) );
 
 			// If a name and a URL are provided.
 			if ( $credit && $link ) {
@@ -344,7 +344,7 @@ class Admin {
 		}
 
 		// Apply a filter for unforseen possibilities.
-		$admin_footer = apply_filters( 'burcon_admin_footer', $footer );
+		$admin_footer = apply_filters( 'ccp_admin_footer', $footer );
 
 		// Echo the string.
 		echo $admin_footer;
@@ -353,6 +353,9 @@ class Admin {
 
 	/**
 	 * Enqueue the stylesheets for the admin area.
+	 *
+	 * Uses the universal slug partial for admin pages. Set this
+     * slug in the core plugin file.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -367,15 +370,30 @@ class Admin {
 		 *
 		 * @since 1.0.0
 		 */
-		wp_enqueue_style( BURCON_ADMIN_SLUG . '-admin', plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', [], BURCON_VERSION, 'all' );
+		wp_enqueue_style( BURCON_ADMIN_SLUG . '-admin', BURCON_URL . 'admin/assets/css/admin.css', [], BURCON_VERSION, 'all' );
+
+		/**
+		 * Enqueue the jQuery tooltips styles.
+		 *
+		 * These are the default styles from jQuery. Design the as you see fir
+		 * to jive with your backend styles.
+		 *
+		 * For more control over tooltips, replace jQuery tooltips with Tooltipster,
+		 * which is included with this plugin.
+		 *
+		 * @since 1.0.0
+		 */
+		wp_enqueue_style( BURCON_ADMIN_SLUG . '-tooltips', BURCON_URL . 'admin/assets/css/tooltips.min.css', [], BURCON_VERSION, 'all' );
 
 		/**
 		 * Enqueue Advanced Custom Fields styles.
-		 * 
+		 *
 		 * Only if the free or pro version of the plugin is active.
+		 *
+		 * @since 1.0.0
 		 */
 		if ( class_exists( 'acf' ) ) {
-			wp_enqueue_style( BURCON_ADMIN_SLUG . '-acf', plugin_dir_url( __FILE__ ) . 'assets/css/acf.css', [], BURCON_VERSION, 'all' );
+			wp_enqueue_style( BURCON_ADMIN_SLUG . '-acf', BURCON_URL . 'admin/assets/css/acf.css', [], BURCON_VERSION, 'all' );
 		}
 
 		/**
@@ -385,9 +403,9 @@ class Admin {
 		 *
 		 * @since 1.0.0
 		 */
-		$welcome = get_option( 'burcon_custom_welcome' );
+		$welcome = get_option( 'ccp_custom_welcome' );
 		if ( $welcome ) {
-			wp_enqueue_style( BURCON_ADMIN_SLUG . '-welcome', plugin_dir_url( __FILE__ ) . 'assets/css/welcome.css', [], BURCON_VERSION, 'all' );
+			wp_enqueue_style( BURCON_ADMIN_SLUG . '-welcome', BURCON_URL . 'admin/assets/css/welcome.css', [], BURCON_VERSION, 'all' );
 		}
 
 	}
@@ -402,7 +420,7 @@ class Admin {
 
 		ob_start();
 
-		require plugin_dir_path( __FILE__ ) . 'partials/searchform.php';
+		require BURCON_PATH . 'partials/searchform.php';
 
 		$form = ob_get_clean();
 
@@ -438,11 +456,19 @@ class Admin {
 		// Enqueue jQuery tabs from WordPress.
 		wp_enqueue_script( 'jquery-ui-tabs' );
 
+		/**
+		 * Enqueue jQuery tooltips from WordPress.
+		 *
+		 * For more control over tooltips, replace jQuery tooltips with Tooltipster,
+		 * which is included with this plugin.
+		 */
+		wp_enqueue_script( 'jquery-ui-tooltip' );
+
 		// Enqueue Conditionalize for conditional form fields.
-		wp_enqueue_script( BURCON_ADMIN_SLUG . '-conditionalize', plugin_dir_url( __FILE__ ) . 'assets/js/admin.js', [ 'jquery' ], BURCON_VERSION, true );
+		wp_enqueue_script( BURCON_ADMIN_SLUG . '-conditionalize', BURCON_URL . 'assets/js/admin.js', [ 'jquery' ], BURCON_VERSION, true );
 
 		// Enqueue scripts for backend functionality of this plugin.
-		wp_enqueue_script( BURCON_ADMIN_SLUG . '-admin', plugin_dir_url( __FILE__ ) . 'assets/js/conditionize.flexible.jquery.min.js', [ 'jquery' ], BURCON_VERSION, true );
+		wp_enqueue_script( BURCON_ADMIN_SLUG . '-admin', BURCON_URL . 'assets/js/conditionize.flexible.jquery.min.js', [ 'jquery' ], BURCON_VERSION, true );
 
 	}
 
@@ -455,11 +481,11 @@ class Admin {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_admin() {
+function ccp_admin() {
 
 	return Admin::instance();
 
 }
 
 // Run an instance of the class.
-burcon_admin();
+ccp_admin();

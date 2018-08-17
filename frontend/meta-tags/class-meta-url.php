@@ -4,14 +4,14 @@
  *
  * Conditionally gets the URL of the current page.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Frontend\Meta_Tags
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Frontend\Meta_Tags;
+namespace CC_Plugin\Frontend\Meta_Tags;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -27,7 +27,7 @@ if ( ! defined( 'WPINC' ) ) {
 class Meta_URL {
 
 	/**
-	 * Get an instance of the plugin class.
+	 * Get an instance of the class.
 	 *
 	 * @since  1.0.0
 	 * @access public
@@ -63,7 +63,7 @@ class Meta_URL {
 		add_action( 'template_redirect', [ $this, 'page' ] );
 
 		// Add the URL to the meta tags.
-		add_action( 'burcon_meta_url_tag', [ $this, 'content' ] );
+		add_action( 'ccp_meta_url_tag', [ $this, 'content' ] );
 
 	}
 
@@ -198,11 +198,11 @@ class Meta_URL {
  * @access public
  * @return object Returns an instance of the class.
  */
-function burcon_meta_url() {
+function ccp_meta_url() {
 
 	return Meta_URL::instance();
 
 }
 
 // Run an instance of the class.
-burcon_meta_url();
+ccp_meta_url();

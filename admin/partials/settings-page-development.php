@@ -2,14 +2,14 @@
 /**
  * Development subpage output.
  *
- * @package    Burcon_Plugin
+ * @package    Burcon_Outfitters_Plugin
  * @subpackage Admin\Partials
  *
  * @since      1.0.0
  * @author     Greg Sweet <greg@ccdzine.com>
  */
 
-namespace Burcon_Plugin\Admin\Partials;
+namespace CC_Plugin\Admin\Partials;
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
@@ -48,7 +48,7 @@ $tabs = [
 ];
 
 // Apply a filter to the tabs array for adding tabs.
-$page_tabs = apply_filters( 'burcon_tabs_development', $tabs );
+$page_tabs = apply_filters( 'ccp_tabs_development', $tabs );
 
 /**
  * Do settings section and fields by tab.
@@ -57,16 +57,16 @@ $page_tabs = apply_filters( 'burcon_tabs_development', $tabs );
  * @return void
  */
 if ( 'general' == $active_tab ) {
-    $section = 'burcon-site-development-general';
-    $fields  = 'burcon-site-development-general';
+    $section = 'ccp-site-development-general';
+    $fields  = 'ccp-site-development-general';
 } else {
     $section = null;
     $fields  = null;
 }
 
 // Apply filters to the sections and fields for new tabs.
-$do_section = apply_filters( 'burcon_section_development', $section );
-$do_fields  = apply_filters( 'burcon_fields_development', $fields );
+$do_section = apply_filters( 'ccp_section_development', $section );
+$do_fields  = apply_filters( 'ccp_fields_development', $fields );
 
 /**
  * Conditional save button text by tab.
@@ -81,7 +81,7 @@ if ( 'general' == $active_tab  ) {
 }
 
 // Apply a filter for new tabs added by another plugin or from a theme.
-$button = apply_filters( 'burcon_save_script_options', $save );
+$button = apply_filters( 'ccp_save_script_options', $save );
 
 // Settings saved notice.
 if ( isset( $_GET['settings-updated'] ) ) { ?>
