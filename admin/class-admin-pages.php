@@ -338,7 +338,7 @@ class Admin_Pages {
 
         // Post type: post.
         if ( 'post' == $screen->post_type ) {
-            $post_title = esc_html__( 'Post Title', 'burcon-plugin' );
+            $post_title = esc_html__( 'News Headline', 'burcon-plugin' );
 
         // Post type: page.
         } elseif ( 'page' == $screen->post_type ) {
